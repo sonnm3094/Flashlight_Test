@@ -21,7 +21,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AF_ProjectBase"
+rootProject.name = "AF_Base"
 include(":app")
 include(":ads")
 include(":network")
