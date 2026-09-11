@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.gms.ads.nativead.NativeAdView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/native_ad_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/gnt_outline_shape">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/middle"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/size10"
+            android:layout_marginVertical="@dimen/size5"
+            android:layout_marginTop="@dimen/size2"
+            app:layout_constraintBottom_toTopOf="@+id/ad_call_to_action"
+            app:layout_constraintEnd_toStartOf="@+id/ad_media"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textAd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_ad_view"
+                android:paddingHorizontal="@dimen/size5"
+                android:text="Ad"
+                android:textColor="@color/gnt_white"
+                android:textSize="@dimen/size10"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/ad_headline" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/ad_headline"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size5"
+                android:ellipsize="end"
+                android:lines="2"
+                android:textColor="@color/text_color_cta_2"
+                android:textSize="@dimen/size12"
+                android:includeFontPadding="false"
+                app:fontFamily="@font/roboto_medium"
+                app:layout_constraintBottom_toTopOf="@+id/rating_bar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/textAd"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Nhận học bổng du học Mỹ" />
+
+            <RatingBar
+                android:id="@+id/rating_bar"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:layout_marginTop="@dimen/size2"
+                android:numStars="5"
+                android:progressBackgroundTint="#D9D9D9"
+                android:progressTint="#D9D9D9"
+                android:secondaryProgressTint="#D9D9D9"
+                app:layout_constraintBottom_toTopOf="@+id/ad_body"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ad_headline" />
+
+            <TextView
+                android:id="@+id/ad_body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textColor="@color/gntWhite"
+                android:textSize="@dimen/size11"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rating_bar"
+                tools:text="@tools:sample/lorem/random" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.gms.ads.nativead.MediaView
+            android:id="@+id/ad_media"
+            android:layout_width="@dimen/size200"
+            android:layout_height="@dimen/size120"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:id="@+id/ad_call_to_action"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size40"
+            android:layout_marginHorizontal="@dimen/size10"
+            android:layout_marginTop="@dimen/size5"
+            android:layout_marginBottom="@dimen/size10"
+            android:background="@drawable/shape_cta_native_admob"
+            android:gravity="center"
+            android:lines="1"
+            android:textColor="@color/gnt_white"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/size14"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="@dimen/size40"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ad_media" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.gms.ads.nativead.NativeAdView>

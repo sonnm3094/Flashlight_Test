@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_main"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSetting"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size80"
+        android:text="Setting" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnPremium"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size15"
+        android:text="Premium" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLoadAndShowInter"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size15"
+        android:text="Load And Show Inter" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size15">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLoadAndShowReward"
+            style="@style/StylePurpleButton"
+            android:text="Load And Show Reward" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size30"
+            android:layout_marginTop="@dimen/size5"
+            android:background="@drawable/background_white_radius"
+            android:padding="@dimen/size5"
+            android:text="Ad" />
+    </FrameLayout>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowBanner"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size15"
+        android:text="Show Banner" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowNative"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size15"
+        android:text="Show Native" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnShowNativeAdapter"
+        style="@style/StylePurpleButton"
+        android:layout_marginTop="@dimen/size15"
+        android:text="Show Native Adapter" />
+
+</LinearLayout>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background_main"
+    android:layout_height="match_parent">
+
+    <include
+        android:id="@+id/toolBar"
+        layout="@layout/tool_bar" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/size10"
+        android:paddingTop="@dimen/size10"
+        android:paddingBottom="@dimen/size15"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="2" />
+</LinearLayout>
