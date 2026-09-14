@@ -25,10 +25,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size15"
+            android:layout_marginTop="@dimen/size10"
             android:layout_marginBottom="@dimen/size3"
             android:text="@string/title_onboarding_1"
             android:textColor="@color/purple"
-            android:layout_marginTop="@dimen/size10"
             android:textSize="@dimen/size20"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -43,20 +43,10 @@
             android:layout_marginBottom="@dimen/size50"
             android:text="@string/des_onboarding_1"
             android:textColor="@color/text_main"
-            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
             android:textSize="@dimen/size14"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <FrameLayout
-        android:id="@+id/frAdsNative"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <include
-            android:id="@+id/shimmerContainerNative"
-            layout="@layout/loading_native_fullscreen_view" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

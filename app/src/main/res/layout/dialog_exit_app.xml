@@ -29,19 +29,6 @@
         android:textColor="@color/text_main"
         android:textSize="@dimen/size14" />
 
-    <FrameLayout
-        android:id="@+id/frAdsNative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size3"
-        android:layout_marginVertical="@dimen/size10"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <include
-            android:id="@+id/shimmerContainerNative"
-            layout="@layout/loading_native_ad_view_type2" />
-    </FrameLayout>
-
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnKeepUsingApp"
         style="@style/StylePurpleButton"

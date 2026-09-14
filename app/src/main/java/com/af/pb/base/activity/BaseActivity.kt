@@ -20,7 +20,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.viewbinding.ViewBinding
 import com.af.network.connectivity.NetworkConnectivityUtils
-import com.af.pb.ads.BannerAdsUtils
 import com.af.pb.data.model.Language
 import com.af.pb.dialog.LoadingDialog
 import com.af.pb.dialog.NoInternetFullDialog
@@ -218,10 +217,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity() {
         WindowCompat.getInsetsController(window, window.decorView).apply {
             isAppearanceLightStatusBars = false
         }
-    }
-
-    fun initBannerAll(bannerView: FrameLayout) {
-        BannerAdsUtils.initBannerAll(this, this, bannerView)
     }
 
 }

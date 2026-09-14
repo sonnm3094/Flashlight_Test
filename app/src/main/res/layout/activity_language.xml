@@ -33,7 +33,7 @@
         android:orientation="vertical"
         android:paddingBottom="@dimen/size15"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toTopOf="@+id/frAdsNative"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolBar"
         tools:listitem="@layout/item_language" />
 
@@ -50,16 +50,4 @@
         app:layout_constraintBottom_toTopOf="@+id/rcvLanguage"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <FrameLayout
-        android:id="@+id/frAdsNative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size3"
-        android:layout_marginBottom="@dimen/size3"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-        <include
-            android:id="@+id/shimmerContainerNative"
-            layout="@layout/loading_native_ad_view_type1" />
-    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

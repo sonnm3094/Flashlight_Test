@@ -10,10 +10,6 @@ class FirebaseConfigManager {
     companion object {
         const val KEY_ADS_STATUS_ENABLE = "ad_config"
         const val KEY_DISABLE_ALL_ADS = "disable_all_ads"
-        const val KEY_ENABLE_BANNER_VIP = "show_banner_vip"
-        const val KEY_ENABLE_BANNER_SETTING_VIP = "show_banner_setting_vip"
-        const val KEY_ENABLE_PAYWALL_AFTER_OB = "show_paywall_after_ob"
-        const val KEY_ENABLE_PAYWALL_AFTER_SPLASH = "show_paywall_after_splash"
 
         const val KEY_VERSION_FORCE = "version_force"
         const val KEY_IS_FORCE_UPDATE = "is_force_update"
@@ -30,10 +26,6 @@ class FirebaseConfigManager {
     private var isFetchDone = false
     private val pendingActions: MutableList<() -> Unit> = mutableListOf()
 
-    var enableBannerVip: Boolean = true
-    var enableBannerSettingVip: Boolean = true
-    var enablePaywallAfterOb: Boolean = true
-    var enablePaywallAfterSplash: Boolean = true
     var versionForce = "1.0.0"
     var isForceUpdate = false
     var isDisableAllAds = false
@@ -58,10 +50,6 @@ class FirebaseConfigManager {
                 versionForce = FirebaseRemoteConfig.getInstance().getString(KEY_VERSION_FORCE)
                 isForceUpdate = FirebaseRemoteConfig.getInstance().getBoolean(KEY_IS_FORCE_UPDATE)
                 isDisableAllAds = FirebaseRemoteConfig.getInstance().getBoolean(KEY_DISABLE_ALL_ADS)
-                enableBannerVip = FirebaseRemoteConfig.getInstance().getBoolean(KEY_ENABLE_BANNER_VIP)
-                enableBannerSettingVip = FirebaseRemoteConfig.getInstance().getBoolean(KEY_ENABLE_BANNER_SETTING_VIP)
-                enablePaywallAfterOb = FirebaseRemoteConfig.getInstance().getBoolean(KEY_ENABLE_PAYWALL_AFTER_OB)
-                enablePaywallAfterSplash = FirebaseRemoteConfig.getInstance().getBoolean(Companion.KEY_ENABLE_PAYWALL_AFTER_SPLASH)
                 val json = FirebaseRemoteConfig.getInstance().getString(KEY_ADS_STATUS_ENABLE)
                 Logger.e("FirebaseConfigManager : $json")
                 if (json.isEmpty()) {

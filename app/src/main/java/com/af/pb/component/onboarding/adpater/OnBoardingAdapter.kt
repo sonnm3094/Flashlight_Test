@@ -2,57 +2,17 @@ package com.af.pb.component.onboarding.adpater
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import com.ads.admob.helper.adnative.NativeAdHelper
 import com.af.pb.base.adapter.BaseAdapter
 import com.af.pb.data.model.OnBoarding
 import com.af.pb.databinding.ItemOnBoardingBinding
 
 class OnBoardingAdapter : BaseAdapter<OnBoarding, ItemOnBoardingBinding>() {
 
-    private val nativeAdHelpers = mutableMapOf<String, NativeAdHelper>()
-
-    fun setNativeAdHelper(tag: String, adHelper: NativeAdHelper) {
-        nativeAdHelpers[tag] = adHelper
-        val pos = dataSet.indexOfFirst { it.tag == tag }
-        if (pos >= 0) notifyItemChanged(pos)
-    }
-
-    fun findInsertPosition(afterNonFullscreenCount: Int): Int {
-        var count = 0
-        for (i in dataSet.indices) {
-            if (dataSet[i].imageId != 0) {
-                count++
-                if (count == afterNonFullscreenCount) return i + 1
-            }
-        }
-        return dataSet.size
-    }
-
-    fun insertFullscreenAt(position: Int, tag: String) {
-        dataSet.add(position, OnBoarding(imageId = 0, title = 0, description = 0, tag = tag))
-        notifyItemInserted(position)
-    }
-
-    fun hasFullscreenItem(tag: String): Boolean = dataSet.any { it.tag == tag }
-
     override fun binData(viewBinding: ItemOnBoardingBinding, item: OnBoarding, position: Int) {
         viewBinding.apply {
-            if (item.imageId == 0) {
-                frAdsNative.isVisible = true
-                clOnboarding.isVisible = false
-                nativeAdHelpers[item.tag]?.let { adHelper ->
-                    adHelper.setNativeContentView(viewBinding.frAdsNative)
-                    adHelper.setShimmerLayoutView(viewBinding.shimmerContainerNative.shimmerContainerNative)
-                }
-            } else {
-                frAdsNative.isVisible = false
-                clOnboarding.isVisible = true
-                imgBoarding.isVisible = true
-                tvTitle.text = root.context.resources.getString(item.title)
-                tvDescription.text = root.context.resources.getString(item.description)
-                imgBoarding.setImageResource(item.imageId)
-            }
+            tvTitle.text = root.context.resources.getString(item.title)
+            tvDescription.text = root.context.resources.getString(item.description)
+            imgBoarding.setImageResource(item.imageId)
         }
     }
 

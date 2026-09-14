@@ -7,10 +7,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import com.ads.admob.event.FirebaseTrackingManager
-import com.ads.admob.helper.adnative.NativeAdHelper.Companion.bindViews
 import com.af.pb.R
-import com.af.pb.ads.NativeAdsUtils
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.component.language.adapter.LanguageAdapter
 import com.af.pb.component.language.viewmodel.LanguageViewModel
@@ -24,7 +21,6 @@ import com.af.pb.utils.gone
 import com.af.pb.utils.setAppLanguage
 import com.af.pb.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -50,29 +46,14 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
     override fun initViews() = with(viewBinding) {
         isFromSplash = intent.getBooleanExtra(Constant.KEY_INTENT_FROM_SPLASH, false)
-        if (isFromSplash) {
-            FirebaseTrackingManager.getInstance().logEvent("language_view")
-        }
         toolBar.btnBack.isVisible = !isFromSplash
         toolBar.tvTitle.text = resources.getString(R.string.language)
 
         toolBar.btnAction.visible()
         toolBar.btnAction.isEnabled = false
 
-        if (!spManager.isPurchased()) {
-            if (isFromSplash) {
-                initNativeLanguage()
-                preloadNativeOb()
-            } else {
-                initNativeSetting()
-            }
-        }
-
         rcvLanguage.adapter = languageAdapter
         languageAdapter.onClick = {
-            if (isFromSplash) {
-                FirebaseTrackingManager.getInstance().logEvent("language_select_click")
-            }
             toolBar.btnAction.gone()
             var timeDelay = 0L
             if (isFromSplash && !isLoadingShowed) {
@@ -88,7 +69,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                 if (isFromSplash) lottieView.visible()
                 toolBar.btnAction.isEnabled = true
                 toolBar.btnAction.visible()
-                initNativeLanguageSelect()
             }
             languageAdapter.selectLanguage(it.languageCode)
             languageAdapter.selectedLanguage()?.let { languageModel ->
@@ -101,9 +81,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
         }
 
         toolBar.btnAction.setOnClickListener {
-            if (isFromSplash) {
-                FirebaseTrackingManager.getInstance().logEvent("language_fo_save_click")
-            }
             progressBar.visible()
             lottieView.gone()
             toolBar.btnAction.gone()
@@ -122,45 +99,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                 }
             }
         }
-    }
-
-    private fun initNativeLanguage() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            NativeAdsUtils.nativeLanguage.bindViews(
-                this@LanguageActivity,
-                this@LanguageActivity,
-                viewBinding.frAdsNative,
-                viewBinding.shimmerContainerNative.shimmerContainerNative
-            )
-        }
-    }
-
-    private fun initNativeLanguageSelect() {
-        if (isFromSplash && !spManager.isPurchased()) {
-            lifecycleScope.launch(Dispatchers.Main) {
-                NativeAdsUtils.nativeLanguageSelect.bindViews(
-                    this@LanguageActivity,
-                    this@LanguageActivity,
-                    viewBinding.frAdsNative,
-                    viewBinding.shimmerContainerNative.shimmerContainerNative
-                )
-            }
-        }
-    }
-
-    private fun initNativeSetting() {
-        NativeAdsUtils.loadAndShowNativeSetting(
-            this,
-            this,
-            viewBinding.frAdsNative,
-            viewBinding.shimmerContainerNative.shimmerContainerNative
-        )
-    }
-
-    private fun preloadNativeOb() {
-        NativeAdsUtils.preLoadNativeObd1(this)
-        NativeAdsUtils.preLoadNativeOb12Full(this)
-        NativeAdsUtils.preLoadNativeObd2(this)
     }
 
     override fun initData() {

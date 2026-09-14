@@ -116,4 +116,5 @@
     <string name="exit_app_message">You can come back anytime and continue where you left off.</string>
     <string name="keep_using_app">Keep Using App</string>
     <string name="exit_app">Exit App</string>
+    <string name="exit">Exit</string>
 </resources>

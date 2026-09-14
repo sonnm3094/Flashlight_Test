@@ -11,11 +11,9 @@ import com.af.pb.component.language.activity.LanguageActivity
 import com.af.pb.databinding.ActivitySettingBinding
 import com.af.pb.dialog.RateDialog
 import com.af.pb.utils.Constant
-import com.af.pb.utils.Logger
 import com.af.pb.utils.SpManager
 import com.af.pb.utils.openBrowser
 import com.af.pb.utils.share
-import com.google.android.ump.UserMessagingPlatform
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -64,17 +62,17 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
             }
 
             R.id.btnPolicySetting -> {
-                showPolicySetting()
+//                showPolicySetting()
             }
 
         }
     }
 
-    private fun showPolicySetting() {
-        UserMessagingPlatform.showPrivacyOptionsForm(this) { formError ->
-            Logger.e("${formError?.errorCode} -- ${formError?.message}")
-        }
-    }
+//    private fun showPolicySetting() {
+//        UserMessagingPlatform.showPrivacyOptionsForm(this) { formError ->
+//            Logger.e("${formError?.errorCode} -- ${formError?.message}")
+//        }
+//    }
 
     companion object {
         fun start(activity: Activity) {
