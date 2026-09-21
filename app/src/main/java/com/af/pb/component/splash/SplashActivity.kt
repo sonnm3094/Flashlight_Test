@@ -6,10 +6,8 @@ import androidx.lifecycle.lifecycleScope
 import com.af.pb.BuildConfig
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.component.language.activity.LanguageActivity
-import com.af.pb.component.main.activity.MainActivity
 import com.af.pb.databinding.ActivitySplashBinding
 import com.af.pb.dialog.ForceUpdateDialog
-import com.af.pb.dialog.NoInternetDialog
 import com.af.pb.utils.FirebaseConfigManager
 import com.af.pb.utils.SpManager
 import com.af.pb.utils.Utils
@@ -49,28 +47,15 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun checkConnection() {
-        if (Utils.isConnected(this)) {
-            lifecycleScope.launch {
-                delay(2000.milliseconds)
-                if (shouldForceUpdate()) {
-                    startForceUpdate()
-                } else {
-                    goToMainScreen()
-                }
-            }
-        } else {
-            NoInternetDialog(this).apply {
-                show()
-                onRetry = {
-                    checkConnection()
-                }
-                onCancel = {
-                    finish()
-                }
+        lifecycleScope.launch {
+            delay(2000.milliseconds)
+            if (Utils.isConnected(this@SplashActivity) && shouldForceUpdate()) {
+                startForceUpdate()
+            } else {
+                goToMainScreen()
             }
         }
     }
-
 
     private fun shouldForceUpdate(): Boolean {
         val config = FirebaseConfigManager.instance()
@@ -121,11 +106,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     }
 
     private fun goToMainScreen() {
-        if (spManager.isLanguageChosen()) {
-            MainActivity.start(this)
-        } else {
-            LanguageActivity.start(this, true)
-        }
+        LanguageActivity.start(this, true)
         finish()
     }
 

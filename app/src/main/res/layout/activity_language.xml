@@ -4,34 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_main"
-    android:orientation="vertical">
+    android:background="@color/background_main">
 
     <include
         android:id="@+id/toolBar"
-        layout="@layout/tool_bar" />
-
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottieView"
-        android:visibility="gone"
-        android:layout_width="@dimen/size80"
-        android:layout_height="@dimen/size52"
-        android:layout_marginTop="@dimen/size60"
-        android:elevation="1dp"
-        app:layout_constraintEnd_toEndOf="@+id/toolBar"
-        app:layout_constraintTop_toTopOf="@+id/toolBar"
-        app:lottie_autoPlay="true"
-        app:lottie_loop="true"
-        app:lottie_rawRes="@raw/finger" />
+        layout="@layout/tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvLanguage"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:clipToPadding="false"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/size15"
+        android:paddingVertical="@dimen/size10"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolBar"
@@ -39,15 +26,13 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="@dimen/size30"
-        android:layout_height="@dimen/size30"
-        android:layout_marginEnd="@dimen/size15"
-        android:layout_marginBottom="@dimen/size6"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/color_main"
-        android:progressTint="@color/color_main"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/yellow"
         android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/rcvLanguage"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,12 +2,12 @@ package com.af.pb.component.language.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.af.pb.R
 import com.af.pb.base.adapter.BaseAdapter
 import com.af.pb.data.model.Language
 import com.af.pb.databinding.ItemLanguageBinding
-import com.af.pb.utils.gone
-import com.af.pb.utils.visible
+import com.bumptech.glide.Glide
 
 class LanguageAdapter : BaseAdapter<Language, ItemLanguageBinding>() {
     private var isFromSplash = false
@@ -24,21 +24,26 @@ class LanguageAdapter : BaseAdapter<Language, ItemLanguageBinding>() {
     override fun binData(viewBinding: ItemLanguageBinding, item: Language, position: Int) {
         viewBinding.apply {
             tvTitle.setText(item.nameRes)
-            if (item.languageCode == "en" && isFromSplash && selectedLanguage() == null) {
-                lottieView.visible()
-            } else {
-                lottieView.gone()
-            }
+
+            val flagFile = if (item.flagName.isNotEmpty()) item.flagName else "${item.languageCode}.png"
+            Glide.with(root.context)
+                .load("file:///android_asset/$flagFile")
+                .placeholder(R.drawable.ic_launcher_background)
+                .error(R.drawable.ic_launcher_background)
+                .into(imgFlag)
+
             if (item.selected) {
+                tvTitle.setTextColor(ContextCompat.getColor(root.context, R.color.yellow))
                 imgCheckbox.setImageResource(R.drawable.ic_checkbox_checked)
+                linearLayout5.isSelected = true
             } else {
+                tvTitle.setTextColor(ContextCompat.getColor(root.context, R.color.white))
                 imgCheckbox.setImageResource(R.drawable.ic_checkbox_normal)
+                linearLayout5.isSelected = false
             }
             root.setOnClickListener {
-                lottieView.gone()
                 onClick?.invoke(item)
             }
-
         }
     }
 
@@ -52,12 +57,6 @@ class LanguageAdapter : BaseAdapter<Language, ItemLanguageBinding>() {
         if (index > -1) {
             dataSet[index].selected = true
             notifyItemChanged(index)
-        }
-        if (isFromSplash) {
-            val enIndex = dataSet.indexOfFirst { it.languageCode == "en" }
-            if (enIndex > -1 && enIndex != index) {
-                notifyItemChanged(enIndex)
-            }
         }
     }
 

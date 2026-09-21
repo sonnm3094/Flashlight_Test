@@ -37,6 +37,8 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
     @Inject
     lateinit var spManager: SpManager
 
+    override val shouldShowNoInternetDialog: Boolean = false
+
     private var isLoadingShowed = false
     private var isFromSplash = false
 
@@ -54,11 +56,10 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
         rcvLanguage.adapter = languageAdapter
         languageAdapter.onClick = {
-            toolBar.btnAction.gone()
             var timeDelay = 0L
             if (isFromSplash && !isLoadingShowed) {
                 progressBar.visible()
-                timeDelay = 2000
+                timeDelay = 500L
                 isLoadingShowed = true
             } else {
                 progressBar.gone()
@@ -66,7 +67,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             lifecycleScope.launch {
                 delay(timeDelay.milliseconds)
                 progressBar.gone()
-                if (isFromSplash) lottieView.visible()
                 toolBar.btnAction.isEnabled = true
                 toolBar.btnAction.visible()
             }
@@ -82,10 +82,9 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
 
         toolBar.btnAction.setOnClickListener {
             progressBar.visible()
-            lottieView.gone()
             toolBar.btnAction.gone()
             lifecycleScope.launch {
-                delay(1000.milliseconds)
+                delay(500.milliseconds)
                 progressBar.gone()
                 selectLanguageModel?.let {
                     spManager.saveLanguage(it)
@@ -96,6 +95,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                     } else {
                         MainActivity.startNewTask(this@LanguageActivity)
                     }
+                    finish()
                 }
             }
         }
@@ -112,7 +112,6 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                 languageAdapter.selectLanguage(spManager.getLanguage().languageCode)
             }
         }.flowWithLifecycle(lifecycle, Lifecycle.State.CREATED).launchIn(lifecycleScope)
-
     }
 
     companion object {
