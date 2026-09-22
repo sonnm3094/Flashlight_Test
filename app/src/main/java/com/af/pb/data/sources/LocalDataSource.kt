@@ -24,27 +24,16 @@ class LocalDataSource @Inject constructor() {
             Language("ru", R.string.russian, "rus.png"),
             Language("tr", R.string.turkish, "tk.png"),
             Language("zh-TW", R.string.chinese_traditional, "cn.png"),
-            Language("ar", R.string.arabic, "ar.png"),
-            Language("vi", R.string.vietnamese, "vn.png"),
-            Language("th", R.string.thai, "th.png"),
-            Language("fil", R.string.filipino, "fil.png"),
-            Language("ms", R.string.malay, "ms.png"),
-            Language("pl", R.string.polish, "pl.png"),
-            Language("bn", R.string.bengali, "bn.png"),
-            Language("ta", R.string.tamil, "ta.png"),
-            Language("te", R.string.telugu, "te.png"),
-            Language("ro", R.string.romanian, "ro.png"),
-            Language("cs", R.string.czech, "cs.png"),
-            Language("el", R.string.greek, "el.png")
+            Language("vi", R.string.vietnamese, "vn.png")
         )
     }
 
     fun getListOnBoarding(): List<OnBoarding> {
         return listOf(
-            OnBoarding(R.mipmap.bg_onboarding_1, R.string.title_onboarding_1, R.string.des_onboarding_1),
-            OnBoarding(R.mipmap.bg_onboarding_2, R.string.title_onboarding_2, R.string.des_onboarding_2),
-            OnBoarding(R.mipmap.bg_onboarding_3, R.string.title_onboarding_3, R.string.des_onboarding_3),
-            OnBoarding(R.mipmap.bg_onboarding_4, R.string.title_onboarding_4, R.string.des_onboarding_4)
+            OnBoarding(R.mipmap.bg_onboarding_1, R.string.title_onboarding_1, R.string.des_onboarding_1, type = OnBoarding.TYPE_1),
+            OnBoarding(R.mipmap.bg_onboarding_2, R.string.title_onboarding_2, R.string.des_onboarding_2, type = OnBoarding.TYPE_2),
+            OnBoarding(R.mipmap.bg_onboarding_3, R.string.title_onboarding_3, R.string.des_onboarding_3, type = OnBoarding.TYPE_1),
+            OnBoarding(R.mipmap.bg_onboarding_4, R.string.title_onboarding_4, R.string.des_onboarding_4, type = OnBoarding.TYPE_2)
         )
     }
 

@@ -2,6 +2,7 @@ package com.af.pb.component.language.activity
 
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import androidx.activity.viewModels
 import androidx.core.view.isVisible
 import androidx.lifecycle.Lifecycle
@@ -25,6 +26,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.milliseconds
 
@@ -73,6 +75,7 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
             languageAdapter.selectLanguage(it.languageCode)
             languageAdapter.selectedLanguage()?.let { languageModel ->
                 selectLanguageModel = languageModel
+                toolBar.btnAction.text = getLocalizedSavedString(languageModel.languageCode)
             }
         }
 
@@ -98,6 +101,29 @@ class LanguageActivity : BaseActivity<ActivityLanguageBinding>() {
                     finish()
                 }
             }
+        }
+    }
+
+    private fun getLocalizedSavedString(languageCode: String): String {
+        return try {
+            val locale = when {
+                languageCode.startsWith("b+") -> Locale.forLanguageTag(languageCode.removePrefix("b+"))
+                languageCode.contains("-r") -> {
+                    val parts = languageCode.split("-r")
+                    Locale(parts[0], parts[1])
+                }
+                languageCode.contains("-") -> {
+                    val parts = languageCode.split("-")
+                    Locale(parts[0], parts[1])
+                }
+                else -> Locale(languageCode)
+            }
+            val config = Configuration(resources.configuration)
+            config.setLocale(locale)
+            val localizedContext = createConfigurationContext(config)
+            localizedContext.getString(R.string.done)
+        } catch (_: Exception) {
+            getString(R.string.done)
         }
     }
 

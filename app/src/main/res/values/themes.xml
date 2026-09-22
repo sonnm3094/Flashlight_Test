@@ -2,7 +2,7 @@
 
     <style name="Base.Theme.ShortFilm" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimaryDark">#FFF4F9</item>
-        <item name="android:statusBarColor">#FFF4F9</item>
+        <item name="android:statusBarColor">#0D0D0D</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowFullscreen">false</item>
         <item name="colorAccent">@color/black</item>

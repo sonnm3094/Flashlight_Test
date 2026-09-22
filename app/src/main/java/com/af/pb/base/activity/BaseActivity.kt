@@ -11,6 +11,7 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.activity.R
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
@@ -88,7 +89,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity() {
         setContentView(viewBinding.root)
         WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = false
         hideSystemUI()
-        setFullscreen()
         initViews()
         initData()
         initObserver()
@@ -145,13 +145,6 @@ abstract class BaseActivity<V : ViewBinding> : AppCompatActivity() {
             setReorderingAllowed(true)
             hide(fragment)
         }
-    }
-
-    fun setFullscreen() {
-        applyFitsSystemWindows(viewBinding.root.rootView, false)
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-        window.statusBarColor = Color.TRANSPARENT
-        WindowCompat.getInsetsController(window, window.decorView).isAppearanceLightStatusBars = false
     }
 
     private fun hideSystemUI() {

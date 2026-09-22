@@ -28,19 +28,33 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
 
     override fun initViews() = with(viewBinding) {
         super.initViews()
-        toolBar.tvTitle.text = getString(R.string.settings)
-        toolBar.btnBack.setOnClickListener { onBack() }
+        tvTitle.text = getString(R.string.settings)
+        btnBack.setOnClickListener { onBack() }
         val isShowPolicySettings = spManager.getBoolean(
             Constant.KEY_SP_IS_SHOW_UMP_SETTING, false
         )
 
         btnPolicySetting.isVisible = isShowPolicySettings
 
+        updateLanguageDisplay()
+
         btnLanguage.setOnClickListener(this@SettingActivity)
         btnShareApp.setOnClickListener(this@SettingActivity)
         btnRateUs.setOnClickListener(this@SettingActivity)
         btnPrivacyPolicy.setOnClickListener(this@SettingActivity)
         btnPolicySetting.setOnClickListener(this@SettingActivity)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateLanguageDisplay()
+    }
+
+    private fun updateLanguageDisplay() {
+        try {
+            val lang = spManager.getLanguage()
+            viewBinding.tvCurrentLanguage.text = getString(lang.nameRes)
+        } catch (_: Exception) {}
     }
 
     override fun onClick(v: View?) {

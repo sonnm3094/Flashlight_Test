@@ -3,6 +3,37 @@
     <string name="facebook_app_id" translatable="false">1687919365781703</string>
     <string name="facebook_client_token" translatable="false">9c816e7374cbb1965672cc08a1da9261</string>
 
+    <string name="flashlight" translatable="false">Flashlight</string>
+    <string name="screenlight" translatable="false">Screenlight</string>
+    <string name="home" translatable="false">Home</string>
+    <string name="for_you" translatable="false">For You</string>
+    <string name="led" translatable="false">LED</string>
+    <string name="flash_alert" translatable="false">Flash Alert</string>
+    <string name="flash_light_mode" translatable="false">Flash Light</string>
+    <string name="sos_light" translatable="false">SOS Light</string>
+    <string name="dj_mode" translatable="false">DJ Mode</string>
+    <string name="off_text" translatable="false">OFF</string>
+    <string name="on_text" translatable="false">ON</string>
+    <string name="screen_light_title" translatable="false">ScreenLight</string>
+    <string name="brightness" translatable="false">Brightness</string>
+    <string name="color" translatable="false">Color</string>
+    <string name="choose" translatable="false">Choose</string>
+    <string name="hex" translatable="false">HEX</string>
+    <string name="color_r" translatable="false">R</string>
+    <string name="color_g" translatable="false">G</string>
+    <string name="color_b" translatable="false">B</string>
+    <string name="led_title" translatable="false">LED</string>
+    <string name="text_label" translatable="false">Text</string>
+    <string name="font_size" translatable="false">Font Size</string>
+    <string name="scroll_speed" translatable="false">Scroll Speed</string>
+    <string name="direction" translatable="false">Direction</string>
+    <string name="visual_effects" translatable="false">Visual Effects</string>
+    <string name="background" translatable="false">Background</string>
+    <string name="effect_glow" translatable="false">Glow</string>
+    <string name="effect_blink" translatable="false">Blink</string>
+    <string name="effect_neon" translatable="false">Neon</string>
+    <string name="effect_fade" translatable="false">Fade</string>
+
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
     <string name="hindi">Hindi</string>
@@ -36,20 +67,20 @@
     <string name="done">Save</string>
     <string name="save" translatable="false">Save</string>
 
-    <string name="connection_lost">Oops! No Internet</string>
-    <string name="connection_lost_message">Looks like your connection is offline.</string>
+    <string name="connection_lost">Oops! No Internet Connection</string>
+    <string name="connection_lost_message">Make sure wifi or cellular data is turned on and then try again.</string>
     <string name="go_to_setting">Go To Setting</string>
     <string name="cancel">Cancel</string>
     <string name="retry">Retry</string>
 
-    <string name="title_onboarding_1">Swipe For More.</string>
-    <string name="des_onboarding_1">Find captivating new stories with every single swipe.</string>
-    <string name="title_onboarding_2">Discover Stories You\'ll Love.</string>
-    <string name="des_onboarding_2">Swipe hot short series. Discover your next obsession.</string>
-    <string name="title_onboarding_3">Short Clips, Deep Emotions.</string>
-    <string name="des_onboarding_3">Dive into romance, thrilling twists, and surprises with each episode.</string>
-    <string name="title_onboarding_4">Find the Best Movies </string>
-    <string name="des_onboarding_4">Browse top-rated picks and choose your next favorite.</string>
+    <string name="title_onboarding_1">Bright Flashlight.</string>
+    <string name="des_onboarding_1">Turn your phone into a powerful flashlight anytime.</string>
+    <string name="title_onboarding_2">SOS &amp; DJ Flash</string>
+    <string name="des_onboarding_2">Use SOS mode for emergencies for DJ mode for parties.</string>
+    <string name="title_onboarding_3">LED Banner.</string>
+    <string name="des_onboarding_3">Display scrolling LED text with customizable colors and effects.</string>
+    <string name="title_onboarding_4">Screen Light</string>
+    <string name="des_onboarding_4">Use your display as a bright-colored light source.</string>
 
     <string name="settings">Settings</string>
     <string name="rate_1_title">Oh no! We\'re sorry to hear that.</string>

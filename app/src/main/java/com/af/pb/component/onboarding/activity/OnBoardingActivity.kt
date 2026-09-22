@@ -7,7 +7,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
-import com.af.pb.R
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.component.main.activity.MainActivity
 import com.af.pb.component.onboarding.adpater.OnBoardingAdapter
@@ -32,27 +31,19 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>() {
 
     override fun initViews() = with(viewBinding) {
         super.initViews()
-        setFullscreen()
 
+        onBoardingAdapter.viewPager = vpOnBoarding
+        onBoardingAdapter.onNextClick = {
+            nextAction()
+        }
         vpOnBoarding.adapter = onBoardingAdapter
-        dotsIndicator.attachTo(vpOnBoarding)
 
         vpOnBoarding.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 viewModels.currentPosition = position
-                if (position != onBoardingAdapter.dataSet.size - 1) {
-                    btnNext.text = getString(R.string.next)
-                } else {
-                    btnNext.text = getString(R.string.get_started)
-                }
             }
         })
-
-        btnNext.setOnClickListener {
-            nextAction()
-        }
-
     }
 
     private fun nextAction() {

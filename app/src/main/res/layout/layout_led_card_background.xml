@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardBackground"
+    style="@style/Widget.App.CardContainer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            style="@style/Widget.App.CardTitle"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:text="@string/background" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgSelectedBgPreview"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:riv_corner_radius="12dp"
+            app:riv_border_color="#3A3E48"
+            app:riv_border_width="1dp" />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvBackgrounds"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:nestedScrollingEnabled="false"
+        android:orientation="horizontal"
+        android:overScrollMode="never" />
+
+</LinearLayout>

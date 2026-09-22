@@ -3,6 +3,8 @@
 package com.af.pb.base.dialog
 
 import android.app.Dialog
+import android.content.DialogInterface
+import android.content.pm.ActivityInfo
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -21,6 +23,7 @@ abstract class BaseFullScreenDialogFragment<V : ViewBinding>(
     @LayoutRes contentLayoutId: Int,
 ) : DialogFragment(contentLayoutId) {
     private var _viewBinding: V? = null
+    private var previousOrientation: Int? = null
 
     val viewBinding
         get() =
@@ -34,6 +37,7 @@ abstract class BaseFullScreenDialogFragment<V : ViewBinding>(
 
     open var allowBackToCancel: Boolean = false
     open val useBottomSheetAnimation: Boolean = false
+    open val forceLandscape: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,11 +77,33 @@ abstract class BaseFullScreenDialogFragment<V : ViewBinding>(
             hide(WindowInsetsCompat.Type.navigationBars())
             systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         }
+
+        if (forceLandscape) {
+            val act = activity
+            if (act != null && previousOrientation == null) {
+                previousOrientation = act.requestedOrientation
+                act.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+            }
+        }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        // Không gọi hideNavigationBar() ở đây — onWindowFocusChanged của Activity sẽ xử lý
+    override fun onDismiss(dialog: DialogInterface) {
+        super.onDismiss(dialog)
+        restoreOrientation()
+    }
+
+    override fun onDestroyView() {
+        restoreOrientation()
+        super.onDestroyView()
+        _viewBinding = null
+    }
+
+    private fun restoreOrientation() {
+        val act = activity ?: return
+        if (forceLandscape && previousOrientation != null) {
+            act.requestedOrientation = previousOrientation!!
+            previousOrientation = null
+        }
     }
 
     open fun initViews() {}

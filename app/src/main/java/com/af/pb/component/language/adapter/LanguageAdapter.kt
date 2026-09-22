@@ -28,8 +28,6 @@ class LanguageAdapter : BaseAdapter<Language, ItemLanguageBinding>() {
             val flagFile = if (item.flagName.isNotEmpty()) item.flagName else "${item.languageCode}.png"
             Glide.with(root.context)
                 .load("file:///android_asset/$flagFile")
-                .placeholder(R.drawable.ic_launcher_background)
-                .error(R.drawable.ic_launcher_background)
                 .into(imgFlag)
 
             if (item.selected) {

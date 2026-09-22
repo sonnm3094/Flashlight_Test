@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="44dp">
+
+    <FrameLayout
+        style="@style/Widget.App.ColorPresetContainer"
+        android:layout_gravity="center">
+
+        <View
+            android:id="@+id/vSelectionRing"
+            style="@style/Widget.App.ColorPresetRing"
+            android:visibility="gone" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/imgColor"
+            style="@style/Widget.App.ColorPresetCircle"
+            android:src="@color/white" />
+
+    </FrameLayout>
+
+</FrameLayout>

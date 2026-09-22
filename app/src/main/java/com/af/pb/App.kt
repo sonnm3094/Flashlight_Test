@@ -27,7 +27,6 @@ class App : Application(), Application.ActivityLifecycleCallbacks {
         val instance get() = mInstance
     }
 
-
     override fun onCreate() {
         super.onCreate()
         mInstance = this

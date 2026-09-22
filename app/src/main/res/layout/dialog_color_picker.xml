@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/bg_dialog_color_picker"
+    android:padding="16dp">
+
+    <com.af.pb.component.screenlight.view.ColorSatValView
+        android:id="@+id/vSatValSpectrum"
+        android:layout_width="0dp"
+        android:layout_height="210dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.af.pb.component.screenlight.view.ColorHueSlider
+        android:id="@+id/vHueSlider"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSatValSpectrum" />
+
+    <com.af.pb.component.screenlight.view.ColorAlphaSlider
+        android:id="@+id/vAlphaSlider"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vHueSlider" />
+
+    <LinearLayout
+        android:id="@+id/llInputs"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:baselineAligned="false"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vAlphaSlider">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="12dp"
+            android:layout_weight="1.2"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:text="@string/hex"
+                android:textColor="#33383F"
+                android:textSize="14sp"
+                app:fontFamily="@font/google_sans_medium" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etHex"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_color_input_box"
+                android:gravity="center"
+                android:hint="#FFFFFF"
+                android:inputType="textCapCharacters"
+                android:maxLength="9"
+                android:paddingHorizontal="4dp"
+                android:singleLine="true"
+                android:textColor="#191919"
+                android:textColorHint="#9EA2B0"
+                android:textSize="14sp"
+                app:fontFamily="@font/google_sans_medium" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="2dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:paddingStart="2dp"
+                    android:text="@string/color_r"
+                    android:textColor="#33383F"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:paddingStart="2dp"
+                    android:text="@string/color_g"
+                    android:textColor="#33383F"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="start"
+                    android:paddingStart="2dp"
+                    android:text="@string/color_b"
+                    android:textColor="#33383F"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="@drawable/bg_color_input_box"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etR"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="255"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textColor="#191919"
+                    android:textColorHint="#9EA2B0"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#E1E4EA" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etG"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="255"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textColor="#191919"
+                    android:textColorHint="#9EA2B0"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="#E1E4EA" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etB"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:gravity="center"
+                    android:hint="255"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textColor="#191919"
+                    android:textColorHint="#9EA2B0"
+                    android:textSize="16sp"
+                    app:fontFamily="@font/google_sans_medium" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnChoose"
+        style="@style/StylePrimaryButton"
+        android:layout_width="0dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/choose"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llInputs" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

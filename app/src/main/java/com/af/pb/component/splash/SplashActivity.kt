@@ -41,7 +41,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
 
 
     override fun initViews() {
-        setFullscreen()
         checkConnection()
         viewBinding.tvAds.isVisible = !spManager.isPurchased()
     }
