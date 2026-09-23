@@ -158,5 +158,6 @@
     <string name="exit_app_message">Puedes volver en cualquier momento y continuar donde lo dejaste.</string>
     <string name="keep_using_app">Seguir usando la app</string>
     <string name="exit_app">Salir de la app</string>
+    <string name="exit">Salir</string>
     <string name="settings">Configuración</string>
 </resources>

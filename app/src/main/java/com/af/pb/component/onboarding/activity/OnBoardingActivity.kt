@@ -7,6 +7,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
+import com.af.pb.R
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.component.main.activity.MainActivity
 import com.af.pb.component.onboarding.adpater.OnBoardingAdapter
@@ -32,18 +33,26 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>() {
     override fun initViews() = with(viewBinding) {
         super.initViews()
 
-        onBoardingAdapter.viewPager = vpOnBoarding
-        onBoardingAdapter.onNextClick = {
+        vpOnBoarding.adapter = onBoardingAdapter
+        dotsIndicator.attachTo(vpOnBoarding)
+
+        btnNext.setOnClickListener {
             nextAction()
         }
-        vpOnBoarding.adapter = onBoardingAdapter
 
         vpOnBoarding.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
                 viewModels.currentPosition = position
+                updateNextButtonText(position)
             }
         })
+    }
+
+    private fun updateNextButtonText(position: Int) {
+        val isLast = position == onBoardingAdapter.dataSet.size - 1
+        val btnTextRes = if (isLast) R.string.get_started else R.string.next
+        viewBinding.btnNext.setText(btnTextRes)
     }
 
     private fun nextAction() {
@@ -64,6 +73,7 @@ class OnBoardingActivity : BaseActivity<ActivityOnBoardingBinding>() {
         super.initObserver()
         viewModels.listOnBoarding.onEach {
             onBoardingAdapter.setData(ArrayList(it))
+            updateNextButtonText(viewModels.currentPosition)
         }.flowWithLifecycle(lifecycle, Lifecycle.State.CREATED).launchIn(lifecycleScope)
     }
 

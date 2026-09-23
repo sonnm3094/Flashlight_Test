@@ -25,7 +25,7 @@
             android:id="@+id/btnDirectionRight"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/bg_led_item_selector"
+            android:background="@drawable/bg_direction_unselected"
             android:clickable="true"
             android:focusable="true"
             android:padding="24dp"
@@ -37,14 +37,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="80dp"
-            app:tint="#8E8E93" />
+            app:tint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionLeft"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/bg_led_item_selector"
+            android:background="@drawable/bg_direction_unselected"
             android:clickable="true"
             android:focusable="true"
             android:padding="24dp"
@@ -55,14 +55,14 @@
             app:layout_constraintStart_toEndOf="@+id/btnDirectionRight"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="80dp"
-            app:tint="#FFD54F" />
+            app:tint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionDown"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/bg_led_item_selector"
+            android:background="@drawable/bg_direction_unselected"
             android:clickable="true"
             android:focusable="true"
             android:padding="24dp"
@@ -73,14 +73,14 @@
             app:layout_constraintStart_toEndOf="@+id/btnDirectionLeft"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="80dp"
-            app:tint="#8E8E93" />
+            app:tint="@color/white" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionUp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/bg_led_item_selector"
+            android:background="@drawable/bg_direction_unselected"
             android:clickable="true"
             android:focusable="true"
             android:padding="24dp"
@@ -91,7 +91,7 @@
             app:layout_constraintStart_toEndOf="@+id/btnDirectionDown"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_max="80dp"
-            app:tint="#8E8E93" />
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -6,13 +6,25 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.af.pb.base.dialog.BaseFullScreenDialogFragment
+import com.af.pb.component.screenlight.viewmodel.ScreenLightViewModel
 import com.af.pb.databinding.DialogFullscreenLightBinding
+import com.af.pb.domain.model.ScreenLightState
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
+@AndroidEntryPoint
 class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLightBinding>(0) {
 
-    private var color: Int = 0xFFFFFFFF.toInt()
-    private var brightness: Int = 100
+    private val viewModel: ScreenLightViewModel by activityViewModels()
+
+    private var initialColor: Int = 0xFFFFFFFF.toInt()
+    private var initialBrightness: Int = 100
 
     override var allowBackToCancel: Boolean = true
     override val forceLandscape: Boolean = true
@@ -27,14 +39,16 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            color = it.getInt(ARG_COLOR, 0xFFFFFFFF.toInt())
-            brightness = it.getInt(ARG_BRIGHTNESS, 100)
+            initialColor = it.getInt(ARG_COLOR, 0xFFFFFFFF.toInt())
+            initialBrightness = it.getInt(ARG_BRIGHTNESS, 100)
         }
     }
 
     override fun initViews() = with(viewBinding) {
         super.initViews()
-        vColorView.setBackgroundColor(color)
+
+        vColorView.setBackgroundColor(initialColor)
+        vColorView.alpha = (initialBrightness / 100f).coerceIn(0.15f, 1.0f)
 
         ViewCompat.setOnApplyWindowInsetsListener(btnClose) { v, insets ->
             val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.systemBars())
@@ -54,12 +68,26 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        applyBrightness()
+    override fun initObserver() {
+        super.initObserver()
+        viewModel.state.onEach { state ->
+            updateUi(state)
+        }.flowWithLifecycle(viewLifecycleOwner.lifecycle, Lifecycle.State.STARTED)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun applyBrightness() {
+    private fun updateUi(state: ScreenLightState) = with(viewBinding) {
+        vColorView.setBackgroundColor(state.selectedColor)
+        vColorView.alpha = (state.brightness / 100f).coerceIn(0.15f, 1.0f)
+        applyBrightness(state.brightness)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        applyBrightness(viewModel.state.value.brightness)
+    }
+
+    private fun applyBrightness(brightness: Int) {
         val targetBrightness = (brightness / 100f).coerceIn(0.01f, 1.0f)
 
         dialog?.window?.let { window ->

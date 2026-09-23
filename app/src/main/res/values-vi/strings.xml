@@ -159,5 +159,6 @@
     <string name="exit_app_message">Bạn có thể quay lại bất cứ lúc nào và tiếp tục từ nơi đã dừng.</string>
     <string name="keep_using_app">Tiếp Tục Sử Dụng Ứng Dụng</string>
     <string name="exit_app">Thoát Ứng Dụng</string>
+    <string name="exit">Thoát</string>
     <string name="settings">Cài Đặt</string>
 </resources>

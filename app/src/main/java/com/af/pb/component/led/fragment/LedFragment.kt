@@ -174,21 +174,25 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
 
     private fun updateDirectionButtons(direction: LedDirection) = with(viewBinding.layoutLedDirection) {
         val colorMain = ContextCompat.getColor(requireContext(), R.color.color_main)
-        val colorUnselected = ContextCompat.getColor(requireContext(), R.color.gray)
+        val colorUnselected = ContextCompat.getColor(requireContext(), R.color.white)
 
         val isRight = direction == LedDirection.RIGHT
+        btnDirectionRight.isSelected = isRight
         btnDirectionRight.setBackgroundResource(if (isRight) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
         ImageViewCompat.setImageTintList(btnDirectionRight, ColorStateList.valueOf(if (isRight) colorMain else colorUnselected))
 
         val isLeft = direction == LedDirection.LEFT
+        btnDirectionLeft.isSelected = isLeft
         btnDirectionLeft.setBackgroundResource(if (isLeft) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
         ImageViewCompat.setImageTintList(btnDirectionLeft, ColorStateList.valueOf(if (isLeft) colorMain else colorUnselected))
 
         val isDown = direction == LedDirection.DOWN
+        btnDirectionDown.isSelected = isDown
         btnDirectionDown.setBackgroundResource(if (isDown) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
         ImageViewCompat.setImageTintList(btnDirectionDown, ColorStateList.valueOf(if (isDown) colorMain else colorUnselected))
 
         val isUp = direction == LedDirection.UP
+        btnDirectionUp.isSelected = isUp
         btnDirectionUp.setBackgroundResource(if (isUp) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
         ImageViewCompat.setImageTintList(btnDirectionUp, ColorStateList.valueOf(if (isUp) colorMain else colorUnselected))
     }
@@ -216,7 +220,13 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
 
     private fun updateBackgroundList(state: LedState) {
         val items = mutableListOf<LedBackgroundItem>()
-        items.add(LedBackgroundItem("add", isAddButton = true))
+        items.add(
+            LedBackgroundItem(
+                id = "custom",
+                uriString = state.customBackgroundUri,
+                isAddButton = true
+            )
+        )
 
         try {
             val assetFiles = requireContext().assets.list("background")?.sortedWith { a, b ->
@@ -233,37 +243,7 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             e.printStackTrace()
         }
 
-        if (!state.customBackgroundUri.isNullOrEmpty()) {
-            items.add(LedBackgroundItem("custom", uriString = state.customBackgroundUri))
-        }
-
         backgroundAdapter.submitList(items, state.selectedBackgroundId)
-
-        if (!state.customBackgroundUri.isNullOrEmpty() && state.selectedBackgroundId == "custom") {
-            try {
-                val uri = Uri.parse(state.customBackgroundUri)
-                val input = requireContext().contentResolver.openInputStream(uri)
-                val bitmap = BitmapFactory.decodeStream(input)
-                input?.close()
-            } catch (_: Exception) {
-            }
-        } else if (state.selectedBackgroundId.startsWith("background/")) {
-            try {
-                val input = requireContext().assets.open(state.selectedBackgroundId)
-                val bitmap = BitmapFactory.decodeStream(input)
-                input.close()
-
-            } catch (_: Exception) {
-
-            }
-        } else {
-            val resId = getPresetResId(state.selectedBackgroundId)
-            if (resId != null) {
-
-            } else {
-
-            }
-        }
     }
 
     private fun getPresetResId(bgId: String): Int? {
@@ -307,17 +287,40 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
                 val isSelected = item.id == selectedId
 
                 if (item.isAddButton) {
-                    itemBinding.root.setBackgroundResource(R.drawable.bg_add_background_button)
-                    itemBinding.imgBackground.setImageDrawable(null)
-                    itemBinding.imgBackground.background = null
-                    itemBinding.imgAddIcon.visibility = View.VISIBLE
-                    itemBinding.vSelectionBorder.visibility = View.GONE
-                    itemBinding.root.setOnClickListener {
-                        pickImageLauncher.launch("image/*")
+                    val hasCustomImage = !item.uriString.isNullOrEmpty()
+
+                    if (hasCustomImage) {
+                        itemBinding.root.background = null
+                        itemBinding.imgAddIcon.visibility = View.GONE
+                        itemBinding.vSelectionBorder.visibility =
+                            if (isSelected) View.VISIBLE else View.GONE
+
+                        try {
+                            val uri = Uri.parse(item.uriString)
+                            itemBinding.imgBackground.setImageURI(uri)
+                        } catch (_: Exception) {
+                            itemBinding.imgBackground.setImageDrawable(null)
+                        }
+
+                        itemBinding.root.setOnClickListener {
+                            if (isSelected) {
+                                pickImageLauncher.launch("image/*")
+                            } else {
+                                viewModel.setBackground("custom", item.uriString)
+                            }
+                        }
+                    } else {
+                        itemBinding.root.setBackgroundResource(R.drawable.bg_add_background_button)
+                        itemBinding.imgBackground.setImageDrawable(null)
+                        itemBinding.imgAddIcon.visibility = View.VISIBLE
+                        itemBinding.vSelectionBorder.visibility = View.GONE
+
+                        itemBinding.root.setOnClickListener {
+                            pickImageLauncher.launch("image/*")
+                        }
                     }
                 } else {
                     itemBinding.root.background = null
-                    itemBinding.imgBackground.background = null
                     itemBinding.imgAddIcon.visibility = View.GONE
                     itemBinding.vSelectionBorder.visibility =
                         if (isSelected) View.VISIBLE else View.GONE
@@ -336,10 +339,7 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
                     } else if (!item.uriString.isNullOrEmpty()) {
                         try {
                             val uri = Uri.parse(item.uriString)
-                            val input = itemBinding.root.context.contentResolver.openInputStream(uri)
-                            val bitmap = BitmapFactory.decodeStream(input)
-                            input?.close()
-                            itemBinding.imgBackground.setImageBitmap(bitmap)
+                            itemBinding.imgBackground.setImageURI(uri)
                         } catch (_: Exception) {
                             itemBinding.imgBackground.setImageDrawable(null)
                         }

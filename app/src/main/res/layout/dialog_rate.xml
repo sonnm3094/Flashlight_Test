@@ -84,7 +84,7 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/background_yellow_button_selector"
         android:includeFontPadding="false"
-        android:text="Submit"
+        android:text="@string/submit"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"

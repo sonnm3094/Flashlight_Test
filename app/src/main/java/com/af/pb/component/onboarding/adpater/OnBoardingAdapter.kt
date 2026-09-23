@@ -3,18 +3,12 @@ package com.af.pb.component.onboarding.adpater
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.viewbinding.ViewBinding
-import androidx.viewpager2.widget.ViewPager2
-import com.af.pb.R
 import com.af.pb.base.adapter.BaseAdapter
 import com.af.pb.data.model.OnBoarding
 import com.af.pb.databinding.ItemOnBoarding1Binding
 import com.af.pb.databinding.ItemOnBoarding2Binding
 
-class OnBoardingAdapter(
-    var onNextClick: (() -> Unit)? = null
-) : BaseAdapter<OnBoarding, ViewBinding>() {
-
-    var viewPager: ViewPager2? = null
+class OnBoardingAdapter : BaseAdapter<OnBoarding, ViewBinding>() {
 
     override fun getItemViewType(position: Int): Int {
         return dataSet[position].type
@@ -37,25 +31,17 @@ class OnBoardingAdapter(
     }
 
     override fun binData(viewBinding: ViewBinding, item: OnBoarding, position: Int) {
-        val isLast = position == dataSet.size - 1
-        val btnTextRes = if (isLast) R.string.get_started else R.string.next
-
+        val context = viewBinding.root.context
         when (viewBinding) {
             is ItemOnBoarding1Binding -> {
-                viewBinding.tvTitle.text = viewBinding.root.context.resources.getString(item.title)
-                viewBinding.tvDescription.text = viewBinding.root.context.resources.getString(item.description)
                 viewBinding.imgBoarding.setImageResource(item.imageId)
-                viewBinding.btnNext.setText(btnTextRes)
-                viewBinding.btnNext.setOnClickListener { onNextClick?.invoke() }
-                viewPager?.let { viewBinding.dotsIndicator.attachTo(it) }
+                viewBinding.tvTitle.text = context.getString(item.title)
+                viewBinding.tvDescription.text = context.getString(item.description)
             }
             is ItemOnBoarding2Binding -> {
-                viewBinding.tvTitle.text = viewBinding.root.context.resources.getString(item.title)
-                viewBinding.tvDescription.text = viewBinding.root.context.resources.getString(item.description)
                 viewBinding.imgBoarding.setImageResource(item.imageId)
-                viewBinding.btnNext.setText(btnTextRes)
-                viewBinding.btnNext.setOnClickListener { onNextClick?.invoke() }
-                viewPager?.let { viewBinding.dotsIndicator.attachTo(it) }
+                viewBinding.tvTitle.text = context.getString(item.title)
+                viewBinding.tvDescription.text = context.getString(item.description)
             }
         }
     }

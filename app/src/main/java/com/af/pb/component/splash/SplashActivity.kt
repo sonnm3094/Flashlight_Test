@@ -1,6 +1,10 @@
 package com.af.pb.component.splash
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.content.Intent
+import android.view.animation.LinearInterpolator
 import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.af.pb.BuildConfig
@@ -16,10 +20,8 @@ import com.google.android.play.core.appupdate.AppUpdateOptions
 import com.google.android.play.core.install.model.AppUpdateType
 import com.google.android.play.core.install.model.UpdateAvailability
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.time.Duration.Companion.milliseconds
 
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>() {
@@ -30,24 +32,44 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
     override val shouldShowNoInternetDialog: Boolean = false
 
     private var forceUpdateDialog: ForceUpdateDialog? = null
-
+    private var progressAnimator: ValueAnimator? = null
 
     companion object {
         private const val REQUEST_CODE_UPDATE = 1001
+        private const val SPLASH_DURATION_MS = 2000L
     }
 
     override fun provideViewBinding(): ActivitySplashBinding =
         ActivitySplashBinding.inflate(layoutInflater)
 
-
     override fun initViews() {
-        checkConnection()
         viewBinding.tvAds.isVisible = !spManager.isPurchased()
+        startProgressAnimation()
     }
 
-    private fun checkConnection() {
+    private fun startProgressAnimation() {
+        progressAnimator?.cancel()
+        progressAnimator = ValueAnimator.ofInt(0, 100).apply {
+            duration = SPLASH_DURATION_MS
+            interpolator = LinearInterpolator()
+            addUpdateListener { animation ->
+                if (isFinishing || isDestroyed) return@addUpdateListener
+                val progress = animation.animatedValue as Int
+                viewBinding.progressBar.progress = progress
+                viewBinding.tvProgress.text = "$progress%"
+            }
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    if (isFinishing || isDestroyed) return
+                    checkConnectionAndProceed()
+                }
+            })
+            start()
+        }
+    }
+
+    private fun checkConnectionAndProceed() {
         lifecycleScope.launch {
-            delay(2000.milliseconds)
             if (Utils.isConnected(this@SplashActivity) && shouldForceUpdate()) {
                 startForceUpdate()
             } else {
@@ -104,9 +126,14 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>() {
         super.onBack()
     }
 
+    override fun onDestroy() {
+        progressAnimator?.cancel()
+        progressAnimator = null
+        super.onDestroy()
+    }
+
     private fun goToMainScreen() {
         LanguageActivity.start(this, true)
         finish()
     }
-
 }

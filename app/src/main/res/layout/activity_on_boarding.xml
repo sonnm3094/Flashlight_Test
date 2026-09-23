@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_main">
+    android:background="@color/black">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpOnBoarding"
@@ -13,5 +13,39 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <com.tbuonomo.viewpagerdotsindicator.DotsIndicator
+        android:id="@+id/dots_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size20"
+        app:dotsColor="@color/white_50_percent"
+        app:dotsCornerRadius="6dp"
+        app:dotsSize="10dp"
+        app:dotsSpacing="6dp"
+        app:dotsWidthFactor="2.8"
+        app:layout_constraintBottom_toBottomOf="@+id/btnNext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btnNext"
+        app:progressMode="false"
+        app:selectedDotColor="@color/color_main" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnNext"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/size40"
+        android:layout_marginEnd="@dimen/size20"
+        android:layout_marginBottom="@dimen/size24"
+        android:background="@drawable/bg_next_button"
+        android:includeFontPadding="false"
+        android:paddingHorizontal="@dimen/size24"
+        android:text="@string/next"
+        android:textAllCaps="false"
+        android:textColor="@color/color_main"
+        android:textSize="@dimen/size16"
+        android:textStyle="bold"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
