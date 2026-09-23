@@ -6,7 +6,6 @@ import android.widget.Toast
 import com.af.pb.R
 import com.af.pb.base.dialog.BaseDialog
 import com.af.pb.databinding.DialogRateBinding
-import com.af.pb.utils.openAppInStore
 
 class RateDialog(private val context: Context) : BaseDialog<DialogRateBinding>(context) {
     private var rating = 0f
@@ -28,11 +27,7 @@ class RateDialog(private val context: Context) : BaseDialog<DialogRateBinding>(c
 
         btnRate.setOnClickListener {
             dismiss()
-            if (rating < 4) {
-                Toast.makeText(context, context.resources.getString(R.string.thanks_for_feedback), Toast.LENGTH_SHORT).show()
-            } else {
-                context.openAppInStore()
-            }
+            Toast.makeText(context, context.resources.getString(R.string.thanks_for_feedback), Toast.LENGTH_SHORT).show()
         }
 
         btnClose.setOnClickListener { dismiss() }
@@ -71,6 +66,6 @@ class RateDialog(private val context: Context) : BaseDialog<DialogRateBinding>(c
                 tvMessage.text = context.getString(R.string.rate_message)
             }
         }
-        btnRate.text = "Submit"
+        btnRate.text = context.getString(R.string.submit)
     }
 }

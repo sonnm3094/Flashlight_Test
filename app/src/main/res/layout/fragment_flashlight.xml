@@ -21,7 +21,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:fontFamily="@font/google_sans_bold"
+            app:fontFamily="@font/plus_jakarta_sans_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +32,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@drawable/bg_circle_setting"
+            android:clickable="true"
+            android:focusable="true"
             android:padding="8dp"
             android:src="@drawable/ic_setting"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -75,7 +77,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
-            app:tint="#C1C7D0" />
+            app:tint="@color/color_icon_unselected" />
 
         <TextView
             android:id="@+id/tvPowerState"
@@ -83,10 +85,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/off_text"
-            android:textColor="#A0A0A0"
+            android:textColor="@color/color_text_off_state"
             android:textSize="14sp"
             android:textStyle="bold"
-            app:fontFamily="@font/google_sans_bold"
+            app:fontFamily="@font/plus_jakarta_sans_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +133,7 @@
                 android:text="@string/flash_light_mode"
                 android:textColor="@color/color_main"
                 android:textSize="12sp"
-                app:fontFamily="@font/google_sans_medium" />
+                app:fontFamily="@font/plus_jakarta_sans_medium" />
 
         </LinearLayout>
 
@@ -153,7 +155,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/ic_sos"
-                app:tint="#C1C7D0" />
+                app:tint="@color/color_icon_unselected" />
 
             <TextView
                 android:id="@+id/tvModeSos"
@@ -161,9 +163,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/sos_light"
-                android:textColor="#C1C7D0"
+                android:textColor="@color/color_icon_unselected"
                 android:textSize="12sp"
-                app:fontFamily="@font/google_sans_medium" />
+                app:fontFamily="@font/plus_jakarta_sans_medium" />
 
         </LinearLayout>
 
@@ -185,7 +187,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:src="@drawable/ic_dj_mode"
-                app:tint="#C1C7D0" />
+                app:tint="@color/color_icon_unselected" />
 
             <TextView
                 android:id="@+id/tvModeDj"
@@ -193,9 +195,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/dj_mode"
-                android:textColor="#C1C7D0"
+                android:textColor="@color/color_icon_unselected"
                 android:textSize="12sp"
-                app:fontFamily="@font/google_sans_medium" />
+                app:fontFamily="@font/plus_jakarta_sans_medium" />
 
         </LinearLayout>
 

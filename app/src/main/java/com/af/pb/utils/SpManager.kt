@@ -93,4 +93,24 @@ class SpManager(private val preferences: SharedPreferences) {
         return preferences.getBoolean(Constant.KEY_SP_IS_PURCHASED, false)
     }
 
+    fun getSelectedApps(): Set<String> {
+        return preferences.getStringSet("key_selected_apps", null) ?: emptySet()
+    }
+
+    fun saveSelectedApps(packages: Set<String>) {
+        preferences.edit {
+            putStringSet("key_selected_apps", packages)
+        }
+    }
+
+    fun isFlashAlertEnabled(type: Int): Boolean {
+        return preferences.getBoolean("key_flash_alert_type_$type", false)
+    }
+
+    fun setFlashAlertEnabled(type: Int, enabled: Boolean) {
+        preferences.edit {
+            putBoolean("key_flash_alert_type_$type", enabled)
+        }
+    }
+
 }

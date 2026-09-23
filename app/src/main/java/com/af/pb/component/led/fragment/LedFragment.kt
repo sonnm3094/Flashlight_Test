@@ -64,7 +64,6 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             }
         })
 
-        // Font size slider
         cardFontSize.setOnValueChangeListener { value, fromUser ->
             if (fromUser) {
                 layoutLedPreview.vLedPreview.setLedFontSize(value)
@@ -72,7 +71,6 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             }
         }
 
-        // Scroll speed slider
         cardScrollSpeed.setOnValueChangeListener { value, fromUser ->
             if (fromUser) {
                 layoutLedPreview.vLedPreview.setLedScrollSpeed(value)
@@ -100,29 +98,33 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             }.show()
         }
 
-        // Direction clicks
         layoutLedDirection.btnDirectionRight.setOnClickListener { viewModel.setDirection(LedDirection.RIGHT) }
         layoutLedDirection.btnDirectionLeft.setOnClickListener { viewModel.setDirection(LedDirection.LEFT) }
         layoutLedDirection.btnDirectionDown.setOnClickListener { viewModel.setDirection(LedDirection.DOWN) }
         layoutLedDirection.btnDirectionUp.setOnClickListener { viewModel.setDirection(LedDirection.UP) }
 
-        // Visual Effect clicks
         layoutLedVisualEffects.btnEffectGlow.setOnClickListener { viewModel.setVisualEffect(LedVisualEffect.GLOW) }
         layoutLedVisualEffects.btnEffectBlink.setOnClickListener { viewModel.setVisualEffect(LedVisualEffect.BLINK) }
         layoutLedVisualEffects.btnEffectNeon.setOnClickListener { viewModel.setVisualEffect(LedVisualEffect.NEON) }
         layoutLedVisualEffects.btnEffectFade.setOnClickListener { viewModel.setVisualEffect(LedVisualEffect.FADE) }
 
-        // Background recycler view
         layoutLedBackground.rvBackgrounds.layoutManager =
             LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         layoutLedBackground.rvBackgrounds.adapter = backgroundAdapter
 
-        // Fullscreen expand
-        layoutLedPreview.btnFullscreen.setOnClickListener {
+        val openLedFullScreen = {
             val state = viewModel.state.value
             val resId = getPresetResId(state.selectedBackgroundId)
             LedFullScreenDialog.newInstance(state, resId)
-                .show(childFragmentManager, "LedFullScreenDialog")
+                .show(parentFragmentManager, "LedFullScreenDialog")
+        }
+
+        layoutLedPreview.btnFullscreen.setOnClickListener {
+            openLedFullScreen()
+        }
+
+        layoutLedPreview.vLedPreview.setOnClickListener {
+            openLedFullScreen()
         }
     }
 
@@ -152,28 +154,22 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             layoutLedPreview.vLedPreview.setLedBackgroundRes(resId)
         }
 
-        // Edit text
         if (layoutLedText.etLedText.text.toString() != state.text && !layoutLedText.etLedText.isFocused) {
             isUpdatingFromCode = true
             layoutLedText.etLedText.setText(state.text)
             isUpdatingFromCode = false
         }
 
-        // Sliders
         cardFontSize.setValue(state.fontSize)
         cardScrollSpeed.setValue(state.scrollSpeed)
 
-        // Color card
-        cardColor.setSelectedColor(state.textColor)
+         cardColor.setSelectedColor(state.textColor)
 
-        // Direction buttons UI
-        updateDirectionButtons(state.direction)
+             updateDirectionButtons(state.direction)
 
-        // Visual Effects buttons UI
-        updateVisualEffectsButtons(state.visualEffect)
+            updateVisualEffectsButtons(state.visualEffect)
 
-        // Background items
-        updateBackgroundList(state)
+          updateBackgroundList(state)
     }
 
     private fun updateDirectionButtons(direction: LedDirection) = with(viewBinding.layoutLedDirection) {
@@ -181,40 +177,40 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
         val colorUnselected = ContextCompat.getColor(requireContext(), R.color.gray)
 
         val isRight = direction == LedDirection.RIGHT
-        btnDirectionRight.setBackgroundResource(if (isRight) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
-        ImageViewCompat.setImageTintList(imgDirectionRight, ColorStateList.valueOf(if (isRight) colorMain else colorUnselected))
+        btnDirectionRight.setBackgroundResource(if (isRight) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
+        ImageViewCompat.setImageTintList(btnDirectionRight, ColorStateList.valueOf(if (isRight) colorMain else colorUnselected))
 
         val isLeft = direction == LedDirection.LEFT
-        btnDirectionLeft.setBackgroundResource(if (isLeft) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
-        ImageViewCompat.setImageTintList(imgDirectionLeft, ColorStateList.valueOf(if (isLeft) colorMain else colorUnselected))
+        btnDirectionLeft.setBackgroundResource(if (isLeft) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
+        ImageViewCompat.setImageTintList(btnDirectionLeft, ColorStateList.valueOf(if (isLeft) colorMain else colorUnselected))
 
         val isDown = direction == LedDirection.DOWN
-        btnDirectionDown.setBackgroundResource(if (isDown) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
-        ImageViewCompat.setImageTintList(imgDirectionDown, ColorStateList.valueOf(if (isDown) colorMain else colorUnselected))
+        btnDirectionDown.setBackgroundResource(if (isDown) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
+        ImageViewCompat.setImageTintList(btnDirectionDown, ColorStateList.valueOf(if (isDown) colorMain else colorUnselected))
 
         val isUp = direction == LedDirection.UP
-        btnDirectionUp.setBackgroundResource(if (isUp) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
-        ImageViewCompat.setImageTintList(imgDirectionUp, ColorStateList.valueOf(if (isUp) colorMain else colorUnselected))
+        btnDirectionUp.setBackgroundResource(if (isUp) R.drawable.bg_direction_selected else R.drawable.bg_direction_unselected)
+        ImageViewCompat.setImageTintList(btnDirectionUp, ColorStateList.valueOf(if (isUp) colorMain else colorUnselected))
     }
 
     private fun updateVisualEffectsButtons(effect: LedVisualEffect) = with(viewBinding.layoutLedVisualEffects) {
         val colorMain = ContextCompat.getColor(requireContext(), R.color.color_main)
-        val colorUnselected = ContextCompat.getColor(requireContext(), R.color.gray)
+        val colorUnselected = ContextCompat.getColor(requireContext(), R.color.white)
 
         val isGlow = effect == LedVisualEffect.GLOW
-        btnEffectGlow.setBackgroundResource(if (isGlow) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
+        btnEffectGlow.isSelected = isGlow
         btnEffectGlow.setTextColor(if (isGlow) colorMain else colorUnselected)
 
         val isBlink = effect == LedVisualEffect.BLINK
-        btnEffectBlink.setBackgroundResource(if (isBlink) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
+        btnEffectBlink.isSelected = isBlink
         btnEffectBlink.setTextColor(if (isBlink) colorMain else colorUnselected)
 
         val isNeon = effect == LedVisualEffect.NEON
-        btnEffectNeon.setBackgroundResource(if (isNeon) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
+        btnEffectNeon.isSelected = isNeon
         btnEffectNeon.setTextColor(if (isNeon) colorMain else colorUnselected)
 
         val isFade = effect == LedVisualEffect.FADE
-        btnEffectFade.setBackgroundResource(if (isFade) R.drawable.bg_mode_card_selected else R.drawable.bg_mode_card_unselected)
+        btnEffectFade.isSelected = isFade
         btnEffectFade.setTextColor(if (isFade) colorMain else colorUnselected)
     }
 
@@ -222,7 +218,6 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
         val items = mutableListOf<LedBackgroundItem>()
         items.add(LedBackgroundItem("add", isAddButton = true))
 
-        // Scan all image files in assets/background/
         try {
             val assetFiles = requireContext().assets.list("background")?.sortedWith { a, b ->
                 val numA = a.substringAfter("_").substringBefore(".").toIntOrNull() ?: Int.MAX_VALUE
@@ -244,35 +239,29 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
 
         backgroundAdapter.submitList(items, state.selectedBackgroundId)
 
-        val previewView = viewBinding.layoutLedBackground.imgSelectedBgPreview
         if (!state.customBackgroundUri.isNullOrEmpty() && state.selectedBackgroundId == "custom") {
             try {
                 val uri = Uri.parse(state.customBackgroundUri)
                 val input = requireContext().contentResolver.openInputStream(uri)
                 val bitmap = BitmapFactory.decodeStream(input)
                 input?.close()
-                previewView.setImageBitmap(bitmap)
-                previewView.visibility = View.VISIBLE
             } catch (_: Exception) {
-                previewView.visibility = View.GONE
             }
         } else if (state.selectedBackgroundId.startsWith("background/")) {
             try {
                 val input = requireContext().assets.open(state.selectedBackgroundId)
                 val bitmap = BitmapFactory.decodeStream(input)
                 input.close()
-                previewView.setImageBitmap(bitmap)
-                previewView.visibility = View.VISIBLE
+
             } catch (_: Exception) {
-                previewView.visibility = View.GONE
+
             }
         } else {
             val resId = getPresetResId(state.selectedBackgroundId)
             if (resId != null) {
-                previewView.setImageResource(resId)
-                previewView.visibility = View.VISIBLE
+
             } else {
-                previewView.visibility = View.GONE
+
             }
         }
     }
@@ -318,7 +307,7 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
                 val isSelected = item.id == selectedId
 
                 if (item.isAddButton) {
-                    itemBinding.root.setBackgroundResource(R.drawable.bg_rectangle_box)
+                    itemBinding.root.setBackgroundResource(R.drawable.bg_add_background_button)
                     itemBinding.imgBackground.setImageDrawable(null)
                     itemBinding.imgBackground.background = null
                     itemBinding.imgAddIcon.visibility = View.VISIBLE

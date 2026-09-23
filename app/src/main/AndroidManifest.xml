@@ -5,7 +5,15 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
 
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+    </queries>
 
     <application
         android:name=".App"
@@ -41,25 +49,40 @@
             android:name=".component.onboarding.activity.OnBoardingActivity"
             android:screenOrientation="portrait" />
 
-        <activity
-            android:name=".component.purchase.activity.Purchase1Activity"
-            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".component.purchase.activity.Purchase1Activity"-->
+<!--            android:screenOrientation="portrait" />-->
 
-        <activity
-            android:name=".component.main.activity.ShowBannerActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".component.main.activity.ShowNativeActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".component.main.activity.ShowNativeAdapterActivity"
-            android:screenOrientation="portrait" />
+<!--        <activity-->
+<!--            android:name=".component.main.activity.ShowBannerActivity"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        <activity-->
+<!--            android:name=".component.main.activity.ShowNativeActivity"-->
+<!--            android:screenOrientation="portrait" />-->
+<!--        <activity-->
+<!--            android:name=".component.main.activity.ShowNativeAdapterActivity"-->
+<!--            android:screenOrientation="portrait" />-->
         <activity
             android:name=".component.main.setting.SettingActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name=".component.flashalert.activity.FlashAlertDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.flashalert.activity.SelectAppActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.flashalert.activity.TestCallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.flashalert.activity.TestSmsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.flashalert.activity.TestNotificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".component.flashalert.activity.PermissionActivity"
             android:screenOrientation="portrait" />
 
     </application>

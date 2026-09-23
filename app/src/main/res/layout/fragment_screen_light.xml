@@ -20,7 +20,7 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="bold"
-            app:fontFamily="@font/google_sans_bold"
+            app:fontFamily="@font/plus_jakarta_sans_bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

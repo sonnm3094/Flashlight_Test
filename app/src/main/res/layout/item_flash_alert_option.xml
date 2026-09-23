@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="@drawable/bg_rectangle_box"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingHorizontal="16dp">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgIcon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_phone" />
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
+        app:layout_constraintBottom_toTopOf="@+id/tvSubtitle"
+        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        tools:text="@string/incoming_calls" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="2dp"
+        android:text="@string/tap_for_more_settings"
+        android:textColor="@color/color_text_subtitle"
+        android:textSize="13sp"
+        app:fontFamily="@font/plus_jakarta_sans_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imgIcon"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgArrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/ic_arrow_right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/color_main" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

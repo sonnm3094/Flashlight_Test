@@ -30,19 +30,44 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
         super.initViews()
         tvTitle.text = getString(R.string.settings)
         btnBack.setOnClickListener { onBack() }
+
+        btnLanguage.apply {
+            imgIcon.setImageResource(R.drawable.ic_language)
+            tvTitle.setText(R.string.language)
+            tvValue.visibility = View.VISIBLE
+            root.setOnClickListener(this@SettingActivity)
+        }
+
+        btnShareApp.apply {
+            imgIcon.setImageResource(R.drawable.ic_share)
+            tvTitle.setText(R.string.share_app)
+            root.setOnClickListener(this@SettingActivity)
+        }
+
+        btnRateUs.apply {
+            imgIcon.setImageResource(R.drawable.ic_rate_app)
+            tvTitle.setText(R.string.rate_us)
+            root.setOnClickListener(this@SettingActivity)
+        }
+
+        btnPrivacyPolicy.apply {
+            imgIcon.setImageResource(R.drawable.ic_privacy_policy)
+            tvTitle.setText(R.string.privacy_policy)
+            root.setOnClickListener(this@SettingActivity)
+        }
+
+        btnPolicySetting.apply {
+            imgIcon.setImageResource(R.drawable.ic_policy_setting)
+            tvTitle.setText(R.string.policy_setting)
+            root.setOnClickListener(this@SettingActivity)
+        }
+
         val isShowPolicySettings = spManager.getBoolean(
             Constant.KEY_SP_IS_SHOW_UMP_SETTING, false
         )
-
-        btnPolicySetting.isVisible = isShowPolicySettings
+        btnPolicySetting.root.isVisible = isShowPolicySettings
 
         updateLanguageDisplay()
-
-        btnLanguage.setOnClickListener(this@SettingActivity)
-        btnShareApp.setOnClickListener(this@SettingActivity)
-        btnRateUs.setOnClickListener(this@SettingActivity)
-        btnPrivacyPolicy.setOnClickListener(this@SettingActivity)
-        btnPolicySetting.setOnClickListener(this@SettingActivity)
     }
 
     override fun onResume() {
@@ -53,40 +78,33 @@ class SettingActivity : BaseActivity<ActivitySettingBinding>(), View.OnClickList
     private fun updateLanguageDisplay() {
         try {
             val lang = spManager.getLanguage()
-            viewBinding.tvCurrentLanguage.text = getString(lang.nameRes)
+            viewBinding.btnLanguage.tvValue.text = getString(lang.nameRes)
         } catch (_: Exception) {}
     }
 
     override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.btnLanguage -> {
+        when (v) {
+            viewBinding.btnLanguage.root -> {
                 LanguageActivity.start(this, false)
             }
 
-            R.id.btnShareApp -> {
+            viewBinding.btnShareApp.root -> {
                 share("https://play.google.com/store/apps/details?id=${BuildConfig.APPLICATION_ID}")
             }
 
-            R.id.btnRateUs -> {
+            viewBinding.btnRateUs.root -> {
                 RateDialog(this).show()
             }
 
-            R.id.btnPrivacyPolicy -> {
+            viewBinding.btnPrivacyPolicy.root -> {
                 openBrowser(Constant.LINK_POLICY)
             }
 
-            R.id.btnPolicySetting -> {
+            viewBinding.btnPolicySetting.root -> {
 //                showPolicySetting()
             }
-
         }
     }
-
-//    private fun showPolicySetting() {
-//        UserMessagingPlatform.showPrivacyOptionsForm(this) { formError ->
-//            Logger.e("${formError?.errorCode} -- ${formError?.message}")
-//        }
-//    }
 
     companion object {
         fun start(activity: Activity) {

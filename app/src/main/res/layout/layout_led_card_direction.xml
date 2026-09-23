@@ -2,95 +2,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardDirection"
-    style="@style/Widget.App.CardContainer">
+    style="@style/Widget.App.CardContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <TextView
         style="@style/Widget.App.CardTitle"
-        android:text="@string/direction" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/direction"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="14dp"
-        android:gravity="center"
-        android:orientation="horizontal">
+        android:layout_marginTop="16dp">
 
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionRight"
             android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginEnd="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_mode_card_unselected"
+            android:layout_height="0dp"
+            android:background="@drawable/bg_led_item_selector"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:padding="24dp"
+            android:src="@drawable/ic_direction_right"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnDirectionLeft"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="80dp"
+            app:tint="#8E8E93" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDirectionRight"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_direction_right"
-                app:tint="#8C8C8C" />
-        </FrameLayout>
-
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionLeft"
             android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_mode_card_selected"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_led_item_selector"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:padding="24dp"
+            android:src="@drawable/ic_direction_left"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnDirectionDown"
+            app:layout_constraintStart_toEndOf="@+id/btnDirectionRight"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="80dp"
+            app:tint="#FFD54F" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDirectionLeft"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_direction_left"
-                app:tint="@color/color_main" />
-        </FrameLayout>
-
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionDown"
             android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_mode_card_unselected"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_led_item_selector"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:padding="24dp"
+            android:src="@drawable/ic_direction_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/btnDirectionUp"
+            app:layout_constraintStart_toEndOf="@+id/btnDirectionLeft"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="80dp"
+            app:tint="#8E8E93" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDirectionDown"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_direction_down"
-                app:tint="#8C8C8C" />
-        </FrameLayout>
-
-        <FrameLayout
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btnDirectionUp"
             android:layout_width="0dp"
-            android:layout_height="52dp"
-            android:layout_marginStart="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/bg_mode_card_unselected"
+            android:layout_height="0dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/bg_led_item_selector"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:padding="24dp"
+            android:src="@drawable/ic_direction_up"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/btnDirectionDown"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="80dp"
+            app:tint="#8E8E93" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/imgDirectionUp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_direction_up"
-                app:tint="#8C8C8C" />
-        </FrameLayout>
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

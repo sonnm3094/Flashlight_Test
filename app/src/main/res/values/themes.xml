@@ -12,8 +12,7 @@
     </style>
 
     <style name="Theme.ShortFilm" parent="Base.Theme.ShortFilm">
-        <item name="fontFamily">@font/google_sans</item>
+        <item name="fontFamily">@font/plus_jakarta_sans</item>
     </style>
 
 </resources>
-

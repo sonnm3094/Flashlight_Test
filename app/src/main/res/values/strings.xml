@@ -3,40 +3,59 @@
     <string name="facebook_app_id" translatable="false">1687919365781703</string>
     <string name="facebook_client_token" translatable="false">9c816e7374cbb1965672cc08a1da9261</string>
 
-    <string name="flashlight" translatable="false">Flashlight</string>
-    <string name="screenlight" translatable="false">Screenlight</string>
-    <string name="home" translatable="false">Home</string>
-    <string name="for_you" translatable="false">For You</string>
-    <string name="led" translatable="false">LED</string>
-    <string name="flash_alert" translatable="false">Flash Alert</string>
-    <string name="incoming_calls" translatable="false">Incoming Calls</string>
-    <string name="sms_text" translatable="false">SMS</string>
-    <string name="notification_text" translatable="false">Notification</string>
-    <string name="tap_for_more_settings" translatable="false">Tap for more settings</string>
-    <string name="flash_light_mode" translatable="false">Flash Light</string>
-    <string name="sos_light" translatable="false">SOS Light</string>
-    <string name="dj_mode" translatable="false">DJ Mode</string>
-    <string name="off_text" translatable="false">OFF</string>
-    <string name="on_text" translatable="false">ON</string>
-    <string name="screen_light_title" translatable="false">ScreenLight</string>
-    <string name="brightness" translatable="false">Brightness</string>
-    <string name="color" translatable="false">Color</string>
-    <string name="choose" translatable="false">Choose</string>
-    <string name="hex" translatable="false">HEX</string>
-    <string name="color_r" translatable="false">R</string>
-    <string name="color_g" translatable="false">G</string>
-    <string name="color_b" translatable="false">B</string>
-    <string name="led_title" translatable="false">LED</string>
-    <string name="text_label" translatable="false">Text</string>
-    <string name="font_size" translatable="false">Font Size</string>
-    <string name="scroll_speed" translatable="false">Scroll Speed</string>
-    <string name="direction" translatable="false">Direction</string>
-    <string name="visual_effects" translatable="false">Visual Effects</string>
-    <string name="background" translatable="false">Background</string>
-    <string name="effect_glow" translatable="false">Glow</string>
-    <string name="effect_blink" translatable="false">Blink</string>
-    <string name="effect_neon" translatable="false">Neon</string>
-    <string name="effect_fade" translatable="false">Fade</string>
+    <string name="flashlight">Flashlight</string>
+    <string name="screenlight">Screenlight</string>
+    <string name="home">Home</string>
+    <string name="for_you">For You</string>
+    <string name="led">LED</string>
+    <string name="flash_alert">Flash Alert</string>
+    <string name="incoming_calls">Incoming Calls</string>
+    <string name="sms_text">SMS</string>
+    <string name="notification_text">Notification</string>
+    <string name="tap_for_more_settings">Tap for more settings</string>
+    <string name="flash_light_mode">Flash Light</string>
+    <string name="sos_light">SOS Light</string>
+    <string name="dj_mode">DJ Mode</string>
+    <string name="off_text">OFF</string>
+    <string name="on_text">ON</string>
+    <string name="screen_light_title">ScreenLight</string>
+    <string name="brightness">Brightness</string>
+    <string name="color">Color</string>
+    <string name="choose">Choose</string>
+    <string name="hex">HEX</string>
+    <string name="color_r">R</string>
+    <string name="color_g">G</string>
+    <string name="color_b">B</string>
+    <string name="led_title">LED</string>
+    <string name="text_label">Text</string>
+    <string name="font_size">Font Size</string>
+    <string name="scroll_speed">Scroll Speed</string>
+    <string name="direction">Direction</string>
+    <string name="visual_effects">Visual Effects</string>
+    <string name="background">Background</string>
+    <string name="effect_glow">Glow</string>
+    <string name="effect_blink">Blink</string>
+    <string name="effect_neon">Neon</string>
+    <string name="effect_fade">Fade</string>
+
+    <string name="status_on">Status: On</string>
+    <string name="status_off">Status: Off</string>
+    <string name="select_app">Select App</string>
+    <string name="select_all">Select All</string>
+    <string name="deselect_all">Deselect All</string>
+    <string name="flashing_speed">Flashing Speed</string>
+    <string name="flashing_on">Flashing ON</string>
+    <string name="flashing_off">Flashing OFF</string>
+    <string name="test">TEST</string>
+    <string name="submit">Submit</string>
+    <string name="message_title">Message</string>
+    <string name="time_now">Now</string>
+    <string name="test_notification_body">This is testing notification</string>
+
+    <string name="permission_title">Permission</string>
+    <string name="permission_description">%s is requesting access to provide you with the best service possible</string>
+    <string name="continue_text">Continue</string>
+    <string name="camera_permission">Camera</string>
 
     <string name="english">English</string>
     <string name="vietnamese">Vietnamese</string>
@@ -69,7 +88,7 @@
     <string name="action_contain_ads">This action may contain advertising</string>
     <string name="choose_one">Choose one</string>
     <string name="done">Save</string>
-    <string name="save" translatable="false">Save</string>
+    <string name="save">Save</string>
 
     <string name="connection_lost">Oops, No Internet Connection</string>
     <string name="connection_lost_message">Make sure wifi or cellular data is turned on and then try again.</string>

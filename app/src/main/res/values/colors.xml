@@ -2,20 +2,109 @@
 <resources>
     <color name="black">#0D0D0D</color>
     <color name="white">#FFFFFF</color>
+    <color name="pure_black">#000000</color>
+    <color name="transparent">#00000000</color>
+    <color name="transparent_50">#80000000</color>
+
+    <color name="white_80_percent">#CCFFFFFF</color>
+    <color name="white_50_percent">#80FFFFFF</color>
+    <color name="white_38_percent">#60FFFFFF</color>
+    <color name="white_25_percent">#40FFFFFF</color>
+    <color name="white_20_percent">#33FFFFFF</color>
+
     <color name="color_main">#FFD54F</color>
+    <color name="yellow">#FACE15</color>
+    <color name="color_yellow_accent">#FFC81A</color>
+    <color name="color_yellow_dark">#D79B1D</color>
+    <color name="color_yellow_button_end">#CA8A04</color>
+    <color name="color_yellow_glow_08">#08FFD54F</color>
+    <color name="color_yellow_glow_0d">#0DFFD54F</color>
+    <color name="color_yellow_glow_00">#00FFD54F</color>
+    <color name="color_yellow_glow_80">#80FFD54F</color>
+    <color name="color_yellow_transparent">#00FFC81A</color>
+    <color name="color_yellow_mode_border">#33FACE15</color>
+
+    <color name="background_main">#0D0D0D</color>
+    <color name="color_splash_background">#060919</color>
+    <color name="color_card_dark">#121212</color>
+    <color name="color_card_dark_cc">#CC121212</color>
+    <color name="color_bottom_nav_background">#1C1B1B</color>
+    <color name="color_bottom_nav_glow_center">#312C1E</color>
+    <color name="color_card_container">#1E2128</color>
+    <color name="color_black_transparent_20">#33000000</color>
+    <color name="gray_transparent">#1A747172</color>
+
+    <color name="color_box_background">#2C313B</color>
+    <color name="color_box_background_pressed">#22262C</color>
+    <color name="color_box_border">#36394A</color>
+
+    <color name="color_mode_card_selected">#262A35</color>
+    <color name="color_mode_card_selected_pressed">#1A1D24</color>
+
+    <color name="color_item_language_bg">#1D212B</color>
+    <color name="color_item_language_pressed">#2A2F3B</color>
+    <color name="color_item_language_border">#3A3F4D</color>
+
+    <color name="color_led_card_bg">#323540</color>
+    <color name="color_led_card_pressed">#262830</color>
+    <color name="color_led_card_border">#3B3F4C</color>
+
+    <color name="color_next_button_bg">#1A1C1E</color>
+    <color name="color_next_button_pressed">#25282B</color>
+    <color name="color_palette_bg">#2A2E39</color>
+    <color name="color_seekbar_track">#353534</color>
+    <color name="color_circle_setting_bg">#313131</color>
+    <color name="color_circle_setting_pressed">#3A3E48</color>
+    <color name="color_count_down_bg">#B3AAAAAA</color>
+
+    <color name="color_gradient_bottom_start">#000D0D0D</color>
+    <color name="color_gradient_bottom_center">#B30D0D0D</color>
+    <color name="color_gradient_bottom_end">#FF0D0D0D</color>
+
     <color name="text_main">#FFFFFF</color>
     <color name="text_gray">#666D80</color>
     <color name="text_black">#191919</color>
-    <color name="pink">#FF9AD5</color>
-    <color name="background_main">#0D0D0D</color>
-    <color name="transparent">#00000000</color>
-    <color name="transparent_50">#80000000</color>
-    <color name="gray_transparent">#1A747172</color>
+    <color name="color_text_subtitle">#A0A5B5</color>
+    <color name="color_text_gray_light">#9E9EA4</color>
+    <color name="color_text_off_state">#A0A0A0</color>
+    <color name="color_text_hint">#9EA2B0</color>
+    <color name="color_text_dark_gray">#33383F</color>
+    <color name="color_white_e0">#E0E0E0</color>
+    <color name="color_input_border">#E1E4EA</color>
+    <color name="color_icon_unselected">#C1C7D0</color>
+
     <color name="gray">#8C8C8C</color>
     <color name="gray3">#ECEFF3</color>
     <color name="gray4">#C4C4C4</color>
     <color name="divider">#3B3B3B</color>
+
+    <color name="color_sos_red">#FF4F4F</color>
+    <color name="color_sos_red_dark">#CA0404</color>
+    <color name="color_sos_glow_80">#80FF4F4F</color>
+    <color name="color_sos_glow_00">#00FF4F4F</color>
+
+    <color name="pink">#FF9AD5</color>
+    <color name="color_dj_pink">#FF4FB9</color>
+    <color name="color_dj_purple_dark">#4D04CA</color>
+    <color name="color_dj_glow_80">#804D04CA</color>
+    <color name="color_dj_glow_00">#00FF4FB9</color>
+
     <color name="purple">#D9CEFF</color>
     <color name="purple2">#877CB1</color>
-    <color name="yellow">#FACE15</color>
+
+    <color name="color_preset1_start">#0D001A</color>
+    <color name="color_preset1_center">#311B92</color>
+    <color name="color_preset1_end">#4A148C</color>
+
+    <color name="color_preset2_start">#880E4F</color>
+    <color name="color_preset2_center">#CE93D8</color>
+    <color name="color_preset2_end">#F48FB1</color>
+
+    <color name="color_preset3_start">#651FFF</color>
+    <color name="color_preset3_center">#2979FF</color>
+    <color name="color_preset3_end">#00E5FF</color>
+
+    <color name="color_header_calls">#34C759</color>
+    <color name="color_header_sms">#007AFF</color>
+    <color name="color_language_icon">#2AA5F4</color>
 </resources>

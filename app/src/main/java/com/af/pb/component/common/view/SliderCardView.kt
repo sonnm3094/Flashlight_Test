@@ -58,6 +58,14 @@ open class SliderCardView @JvmOverloads constructor(
         })
     }
 
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        binding.sbSlider.isEnabled = enabled
+        binding.tvTitle.isEnabled = enabled
+        binding.tvValue.isEnabled = enabled
+        alpha = if (enabled) 1.0f else 0.5f
+    }
+
     fun setRange(min: Int, max: Int) {
         this.minValue = min
         this.maxValue = max
@@ -99,6 +107,10 @@ open class SliderCardView @JvmOverloads constructor(
 
     fun setTitleRes(titleRes: Int) {
         binding.tvTitle.setText(titleRes)
+    }
+
+    fun setTitleColor(color: Int) {
+        binding.tvTitle.setTextColor(color)
     }
 
     private fun updateValueText(value: Int) {

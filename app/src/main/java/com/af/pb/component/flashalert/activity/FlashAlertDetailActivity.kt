@@ -1,19 +1,52 @@
 package com.af.pb.component.flashalert.activity
 
+import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
+import android.widget.FrameLayout
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import com.af.pb.R
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.databinding.ActivityFlashAlertDetailBinding
+import com.af.pb.domain.usecase.GetSelectedAppPackagesUseCase
+import com.af.pb.utils.SpManager
+import com.makeramen.roundedimageview.RoundedImageView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>() {
 
+    @Inject
+    lateinit var getSelectedAppPackagesUseCase: GetSelectedAppPackagesUseCase
+
     private var alertType: Int = TYPE_CALL
+    private var isProgrammaticChange = false
+
+    private val permissionLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            val isGranted = result.resultCode == RESULT_OK || isCameraPermissionGranted()
+            if (isGranted) {
+                SpManager.getInstance(this).setFlashAlertEnabled(alertType, true)
+                updateStatusUi(true)
+            } else {
+                isProgrammaticChange = true
+                viewBinding.layoutSwitchCard.swStatus.isChecked = false
+                isProgrammaticChange = false
+                SpManager.getInstance(this).setFlashAlertEnabled(alertType, false)
+                updateStatusUi(false)
+            }
+        }
 
     override fun provideViewBinding(): ActivityFlashAlertDetailBinding {
         return ActivityFlashAlertDetailBinding.inflate(layoutInflater)
@@ -48,14 +81,6 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
             }
         }
 
-        // Separate Switch Card
-        val switchCardBinding = binding.layoutSwitchCard
-        switchCardBinding.tvStatus.text = "Status: Off"
-        switchCardBinding.swStatus.setOnCheckedChangeListener { _, isChecked ->
-            switchCardBinding.tvStatus.text = if (isChecked) "Status: On" else "Status: Off"
-        }
-
-        // Flashing speed sliders
         val speedFormatter = { value: Int -> String.format(Locale.US, "%.1fs", value / 10f) }
 
         val speedCardBinding = binding.layoutFlashingSpeedCard
@@ -67,12 +92,170 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
         speedCardBinding.cardFlashingOff.setValueFormatter(speedFormatter)
         speedCardBinding.cardFlashingOff.setValue(5) // 0.5s
 
+        fun updateToolsState(isEnabled: Boolean) {
+            binding.btnSelectApp.isEnabled = isEnabled
+            binding.btnSelectApp.alpha = if (isEnabled) 1.0f else 0.5f
+
+            speedCardBinding.cardFlashingOn.isEnabled = isEnabled
+            speedCardBinding.cardFlashingOff.isEnabled = isEnabled
+            speedCardBinding.root.alpha = if (isEnabled) 1.0f else 0.5f
+
+            binding.btnTest.isEnabled = isEnabled
+            binding.btnTest.alpha = if (isEnabled) 1.0f else 0.5f
+        }
+
+        val switchCardBinding = binding.layoutSwitchCard
+
+        fun updateStatusUi(isEnabled: Boolean) {
+            switchCardBinding.tvStatus.text = if (isEnabled) getString(R.string.status_on) else getString(R.string.status_off)
+            updateToolsState(isEnabled)
+        }
+
+        switchCardBinding.swStatus.setOnCheckedChangeListener { _, isChecked ->
+            if (isProgrammaticChange) return@setOnCheckedChangeListener
+            if (isChecked) {
+                if (!isCameraPermissionGranted()) {
+                    permissionLauncher.launch(Intent(this, PermissionActivity::class.java))
+                } else {
+                    SpManager.getInstance(this).setFlashAlertEnabled(alertType, true)
+                    updateStatusUi(true)
+                }
+            } else {
+                SpManager.getInstance(this).setFlashAlertEnabled(alertType, false)
+                updateStatusUi(false)
+            }
+        }
+
+        val savedStatus = SpManager.getInstance(this).isFlashAlertEnabled(alertType)
+        isProgrammaticChange = true
+        switchCardBinding.swStatus.isChecked = savedStatus
+        isProgrammaticChange = false
+        updateStatusUi(savedStatus)
+
         binding.btnSelectApp.setOnClickListener {
-            // Select App
+            SelectAppActivity.start(this)
         }
 
         binding.btnTest.setOnClickListener {
-            // Test Flash Alert
+            val speedOnMs = speedCardBinding.cardFlashingOn.getValue() * 100L
+            val speedOffMs = speedCardBinding.cardFlashingOff.getValue() * 100L
+
+            when (alertType) {
+                TYPE_CALL -> {
+                    TestCallActivity.start(this, speedOnMs, speedOffMs)
+                }
+                TYPE_SMS -> {
+                    TestSmsActivity.start(this, speedOnMs, speedOffMs)
+                }
+                TYPE_NOTIFICATION -> {
+                    TestNotificationActivity.start(this, speedOnMs, speedOffMs)
+                }
+            }
+        }
+    }
+
+    private fun isCameraPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            Manifest.permission.CAMERA
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private fun updateStatusUi(isEnabled: Boolean) {
+        val switchCardBinding = viewBinding.layoutSwitchCard
+        switchCardBinding.tvStatus.text = if (isEnabled) getString(R.string.status_on) else getString(R.string.status_off)
+
+        val speedCardBinding = viewBinding.layoutFlashingSpeedCard
+        viewBinding.btnSelectApp.isEnabled = isEnabled
+        viewBinding.btnSelectApp.alpha = if (isEnabled) 1.0f else 0.5f
+
+        speedCardBinding.cardFlashingOn.isEnabled = isEnabled
+        speedCardBinding.cardFlashingOff.isEnabled = isEnabled
+        speedCardBinding.root.alpha = if (isEnabled) 1.0f else 0.5f
+
+        viewBinding.btnTest.isEnabled = isEnabled
+        viewBinding.btnTest.alpha = if (isEnabled) 1.0f else 0.5f
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateSelectedAppsDisplay()
+    }
+
+    private fun updateSelectedAppsDisplay() {
+        if (alertType != TYPE_NOTIFICATION) return
+        val binding = viewBinding
+        val container = binding.llSelectedAppIcons
+        container.removeAllViews()
+
+        val selectedPackages = getSelectedAppPackagesUseCase.execute(this).toList()
+        if (selectedPackages.isEmpty()) return
+
+        val packageManager = packageManager
+        val maxNormalIcons = 2
+        val displayPackages = selectedPackages.take(maxNormalIcons)
+        val remainingCount = selectedPackages.size - maxNormalIcons
+
+        val sizePx = (28 * resources.displayMetrics.density).toInt()
+        val marginPx = (6 * resources.displayMetrics.density).toInt()
+        val cornerRadiusPx = 8f * resources.displayMetrics.density
+
+        for (pkg in displayPackages) {
+            try {
+                val iconDrawable = packageManager.getApplicationIcon(pkg)
+                val imageView = RoundedImageView(this).apply {
+                    layoutParams = LinearLayout.LayoutParams(sizePx, sizePx).apply {
+                        setMargins(0, 0, marginPx, 0)
+                    }
+                    scaleType = ImageView.ScaleType.FIT_CENTER
+                    setCornerRadius(cornerRadiusPx)
+                    setImageDrawable(iconDrawable)
+                }
+                container.addView(imageView)
+            } catch (_: Exception) {}
+        }
+
+          if (remainingCount > 0) {
+            val thirdPackage = selectedPackages.getOrNull(2)
+            val badgeContainer = FrameLayout(this).apply {
+                layoutParams = LinearLayout.LayoutParams(sizePx, sizePx).apply {
+                    setMargins(0, 0, marginPx, 0)
+                }
+            }
+
+            if (thirdPackage != null) {
+                try {
+                    val iconDrawable = packageManager.getApplicationIcon(thirdPackage)
+                    val bgImageView = RoundedImageView(this).apply {
+                        layoutParams = FrameLayout.LayoutParams(sizePx, sizePx)
+                        scaleType = ImageView.ScaleType.FIT_CENTER
+                        setCornerRadius(cornerRadiusPx)
+                        setImageDrawable(iconDrawable)
+                    }
+                    badgeContainer.addView(bgImageView)
+                } catch (_: Exception) {}
+            }
+
+            val darkOverlay = View(this).apply {
+                layoutParams = FrameLayout.LayoutParams(sizePx, sizePx)
+                background = ContextCompat.getDrawable(this@FlashAlertDetailActivity, R.drawable.bg_more_apps_badge)
+            }
+            badgeContainer.addView(darkOverlay)
+
+            val countTextView = TextView(this).apply {
+                layoutParams = FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.MATCH_PARENT
+                )
+                gravity = Gravity.CENTER
+                text = "+$remainingCount"
+                setTextColor(ContextCompat.getColor(this@FlashAlertDetailActivity, R.color.white))
+                textSize = 13f
+                typeface = ResourcesCompat.getFont(this@FlashAlertDetailActivity, R.font.plus_jakarta_sans_bold)
+            }
+            badgeContainer.addView(countTextView)
+
+            container.addView(badgeContainer)
         }
     }
 

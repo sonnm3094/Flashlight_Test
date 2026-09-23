@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="84dp"
-    android:layout_height="76dp"
-    android:layout_marginEnd="12dp"
+    android:layout_width="96dp"
+    android:layout_height="80dp"
+    android:layout_marginEnd="10dp"
     android:clickable="true"
     android:focusable="true">
 
@@ -20,13 +20,14 @@
         android:layout_height="24dp"
         android:layout_gravity="center"
         android:src="@drawable/ic_add_background"
+        app:tint="@color/color_main"
         android:visibility="gone" />
 
     <View
         android:id="@+id/vSelectionBorder"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/bg_led_item_selected_border"
+        android:background="@drawable/bg_led_item_border"
         android:visibility="gone" />
 
 </FrameLayout>

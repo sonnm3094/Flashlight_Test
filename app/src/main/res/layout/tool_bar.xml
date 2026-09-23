@@ -14,15 +14,18 @@
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btnBack"
-        android:layout_width="@dimen/size24"
-        android:layout_height="@dimen/size24"
-        android:layout_marginBottom="@dimen/size10"
-        android:layout_gravity="center_vertical"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="6dp"
         android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
         android:src="@drawable/ic_back"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/space" />
+        app:layout_constraintBottom_toBottomOf="@+id/space"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/space" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
@@ -36,7 +39,7 @@
         android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="@dimen/size18"
-        app:fontFamily="@font/google_sans_medium"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
         app:layout_constraintBottom_toBottomOf="@+id/space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +58,7 @@
         android:textColor="@color/action_toolbar"
         android:textSize="@dimen/size16"
         android:visibility="gone"
-        app:fontFamily="@font/google_sans_medium"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
         app:layout_constraintBottom_toBottomOf="@+id/space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/space" />

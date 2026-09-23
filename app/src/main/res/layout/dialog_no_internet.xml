@@ -31,7 +31,7 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:fontFamily="@font/google_sans_bold"
+        app:fontFamily="@font/plus_jakarta_sans_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgNoWifi" />
@@ -44,9 +44,9 @@
         android:gravity="center"
         android:lineSpacingExtra="3dp"
         android:text="@string/connection_lost_message"
-        android:textColor="#A0A5B5"
+        android:textColor="@color/color_text_subtitle"
         android:textSize="14sp"
-        app:fontFamily="@font/google_sans_regular"
+        app:fontFamily="@font/plus_jakarta_sans_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -63,7 +63,7 @@
         android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:fontFamily="@font/google_sans_medium"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
@@ -77,9 +77,9 @@
         android:includeFontPadding="false"
         android:text="@string/cancel"
         android:textAllCaps="false"
-        android:textColor="#A0A5B5"
+        android:textColor="@color/color_text_subtitle"
         android:textSize="16sp"
-        app:fontFamily="@font/google_sans_medium"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnRetry" />

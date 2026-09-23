@@ -5,9 +5,9 @@
             <gradient
                 android:type="radial"
                 android:gradientRadius="12dp"
-                android:startColor="#FFC81A"
-                android:centerColor="#FFD54F"
-                android:endColor="#00FFC81A" />
+                android:startColor="@color/color_yellow_accent"
+                android:centerColor="@color/color_main"
+                android:endColor="@color/color_yellow_transparent" />
             <size
                 android:width="32dp"
                 android:height="32dp" />
@@ -19,7 +19,7 @@
         android:right="6dp"
         android:top="6dp">
         <shape android:shape="oval">
-            <solid android:color="#FFD54F" />
+            <solid android:color="@color/color_main" />
             <size
                 android:width="20dp"
                 android:height="20dp" />

@@ -59,9 +59,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="2dp"
                 android:text="@string/hex"
-                android:textColor="#33383F"
+                android:textColor="@color/color_text_dark_gray"
                 android:textSize="14sp"
-                app:fontFamily="@font/google_sans_medium" />
+                app:fontFamily="@font/plus_jakarta_sans_medium" />
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/etHex"
@@ -69,15 +69,15 @@
                 android:layout_height="42dp"
                 android:background="@drawable/bg_color_input_box"
                 android:gravity="center"
-                android:hint="#FFFFFF"
+                android:hint="FFFFFF"
                 android:inputType="textCapCharacters"
                 android:maxLength="9"
                 android:paddingHorizontal="4dp"
                 android:singleLine="true"
-                android:textColor="#191919"
-                android:textColorHint="#9EA2B0"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/color_text_hint"
                 android:textSize="14sp"
-                app:fontFamily="@font/google_sans_medium" />
+                app:fontFamily="@font/plus_jakarta_sans_medium" />
 
         </LinearLayout>
 
@@ -100,9 +100,9 @@
                     android:gravity="start"
                     android:paddingStart="2dp"
                     android:text="@string/color_r"
-                    android:textColor="#33383F"
+                    android:textColor="@color/color_text_dark_gray"
                     android:textSize="14sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -111,9 +111,9 @@
                     android:gravity="start"
                     android:paddingStart="2dp"
                     android:text="@string/color_g"
-                    android:textColor="#33383F"
+                    android:textColor="@color/color_text_dark_gray"
                     android:textSize="14sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -122,9 +122,9 @@
                     android:gravity="start"
                     android:paddingStart="2dp"
                     android:text="@string/color_b"
-                    android:textColor="#33383F"
+                    android:textColor="@color/color_text_dark_gray"
                     android:textSize="14sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
             </LinearLayout>
 
@@ -146,15 +146,15 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:singleLine="true"
-                    android:textColor="#191919"
-                    android:textColorHint="#9EA2B0"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/color_text_hint"
                     android:textSize="16sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#E1E4EA" />
+                    android:background="@color/color_input_border" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etG"
@@ -167,15 +167,15 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:singleLine="true"
-                    android:textColor="#191919"
-                    android:textColorHint="#9EA2B0"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/color_text_hint"
                     android:textSize="16sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="#E1E4EA" />
+                    android:background="@color/color_input_border" />
 
                 <androidx.appcompat.widget.AppCompatEditText
                     android:id="@+id/etB"
@@ -188,10 +188,10 @@
                     android:inputType="number"
                     android:maxLength="3"
                     android:singleLine="true"
-                    android:textColor="#191919"
-                    android:textColorHint="#9EA2B0"
+                    android:textColor="@color/text_black"
+                    android:textColorHint="@color/color_text_hint"
                     android:textSize="16sp"
-                    app:fontFamily="@font/google_sans_medium" />
+                    app:fontFamily="@font/plus_jakarta_sans_medium" />
 
             </LinearLayout>
 

@@ -64,7 +64,7 @@ class LedBannerView @JvmOverloads constructor(
     init {
         setLayerType(LAYER_TYPE_SOFTWARE, null)
         try {
-            val customTypeface = ResourcesCompat.getFont(context, R.font.google_sans_bold)
+            val customTypeface = ResourcesCompat.getFont(context, R.font.plus_jakarta_sans_bold)
             textPaint.typeface = customTypeface ?: Typeface.DEFAULT_BOLD
             glowPaint.typeface = customTypeface ?: Typeface.DEFAULT_BOLD
             neonPaint.typeface = customTypeface ?: Typeface.DEFAULT_BOLD

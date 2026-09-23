@@ -52,12 +52,20 @@ class ScreenLightFragment : BaseFragment<FragmentScreenLightBinding>() {
             }
         }
 
-        layoutScreenLightPreview.btnFullscreen.setOnClickListener {
+        val openFullScreenLight = {
             val currentState = viewModel.state.value
             ScreenLightFullScreenDialog.newInstance(
                 currentState.selectedColor,
                 currentState.brightness
-            ).show(childFragmentManager, "ScreenLightFullScreenDialog")
+            ).show(parentFragmentManager, "ScreenLightFullScreenDialog")
+        }
+
+        layoutScreenLightPreview.btnFullscreen.setOnClickListener {
+            openFullScreenLight()
+        }
+
+        layoutScreenLightPreview.vColorPreview.setOnClickListener {
+            openFullScreenLight()
         }
     }
 

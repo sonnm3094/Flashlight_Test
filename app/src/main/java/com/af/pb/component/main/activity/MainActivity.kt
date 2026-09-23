@@ -21,6 +21,7 @@ import com.af.pb.component.flashlight.viewmodel.FlashlightViewModel
 import com.af.pb.component.led.fragment.LedFragment
 import com.af.pb.component.screenlight.fragment.ScreenLightFragment
 import com.af.pb.databinding.ActivityMainBinding
+import com.af.pb.databinding.LayoutBottomNavigationBinding
 import com.af.pb.domain.model.BottomTab
 import com.af.pb.utils.SpManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,23 +39,23 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
 
     override fun provideViewBinding(): ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
 
-    override fun initViews() = with(viewBinding) {
+    override fun initViews() {
         super.initViews()
         spManager.setLanguageChosen()
 
-        btnTabFlashlight.setOnClickListener {
+        viewBinding.layoutBottomNav.btnTabFlashlight.setOnClickListener {
             viewModel.selectTab(BottomTab.FLASHLIGHT)
         }
 
-        btnTabScreenlight.setOnClickListener {
+        viewBinding.layoutBottomNav.btnTabScreenlight.setOnClickListener {
             viewModel.selectTab(BottomTab.SCREENLIGHT)
         }
 
-        btnTabLed.setOnClickListener {
+        viewBinding.layoutBottomNav.btnTabLed.setOnClickListener {
             viewModel.selectTab(BottomTab.LED)
         }
 
-        btnTabFlashAlert.setOnClickListener {
+        viewBinding.layoutBottomNav.btnTabFlashAlert.setOnClickListener {
             viewModel.selectTab(BottomTab.FLASH_ALERT)
         }
     }
@@ -74,59 +75,62 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
             .launchIn(lifecycleScope)
     }
 
-    private fun updateBottomNavUi(selectedTab: BottomTab) = with(viewBinding) {
-        val colorMain = ContextCompat.getColor(this@MainActivity, R.color.color_main)
+    private fun updateBottomNavUi(selectedTab: BottomTab) {
+        val bottomNavBinding: LayoutBottomNavigationBinding = viewBinding.layoutBottomNav
+        val colorMain = ContextCompat.getColor(this, R.color.color_main)
         val colorUnselected = Color.parseColor("#80FFFFFF")
-        val transparent = ContextCompat.getColor(this@MainActivity, R.color.transparent)
+        val transparent = ContextCompat.getColor(this, R.color.transparent)
 
-        btnTabFlashlight.setBackgroundColor(transparent)
-        btnTabScreenlight.setBackgroundColor(transparent)
-        btnTabLed.setBackgroundColor(transparent)
-        btnTabFlashAlert.setBackgroundColor(transparent)
+        with(bottomNavBinding) {
+            btnTabFlashlight.setBackgroundColor(transparent)
+            btnTabScreenlight.setBackgroundColor(transparent)
+            btnTabLed.setBackgroundColor(transparent)
+            btnTabFlashAlert.setBackgroundColor(transparent)
 
-        vGlowFlashlight.visibility = View.GONE
-        vGlowScreenlight.visibility = View.GONE
-        vGlowLed.visibility = View.GONE
-        vGlowFlashAlert.visibility = View.GONE
+            vGlowFlashlight.visibility = View.GONE
+            vGlowScreenlight.visibility = View.GONE
+            vGlowLed.visibility = View.GONE
+            vGlowFlashAlert.visibility = View.GONE
 
-        ImageViewCompat.setImageTintList(imgTabFlashlight, ColorStateList.valueOf(colorUnselected))
-        ImageViewCompat.setImageTintList(imgTabScreenlight, ColorStateList.valueOf(colorUnselected))
-        ImageViewCompat.setImageTintList(imgTabLed, ColorStateList.valueOf(colorUnselected))
-        ImageViewCompat.setImageTintList(imgTabFlashAlert, ColorStateList.valueOf(colorUnselected))
+            ImageViewCompat.setImageTintList(imgTabFlashlight, ColorStateList.valueOf(colorUnselected))
+            ImageViewCompat.setImageTintList(imgTabScreenlight, ColorStateList.valueOf(colorUnselected))
+            ImageViewCompat.setImageTintList(imgTabLed, ColorStateList.valueOf(colorUnselected))
+            ImageViewCompat.setImageTintList(imgTabFlashAlert, ColorStateList.valueOf(colorUnselected))
 
-        tvTabFlashlight.setTextColor(colorUnselected)
-        tvTabScreenlight.setTextColor(colorUnselected)
-        tvTabLed.setTextColor(colorUnselected)
-        tvTabFlashAlert.setTextColor(colorUnselected)
+            tvTabFlashlight.setTextColor(colorUnselected)
+            tvTabScreenlight.setTextColor(colorUnselected)
+            tvTabLed.setTextColor(colorUnselected)
+            tvTabFlashAlert.setTextColor(colorUnselected)
 
-        when (selectedTab) {
-            BottomTab.FLASHLIGHT -> {
-                vGlowFlashlight.visibility = View.VISIBLE
-                btnTabFlashlight.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
-                ImageViewCompat.setImageTintList(imgTabFlashlight, ColorStateList.valueOf(colorMain))
-                tvTabFlashlight.setTextColor(colorMain)
-                displayTabFragment(FlashlightFragment.newInstance())
-            }
-            BottomTab.SCREENLIGHT -> {
-                vGlowScreenlight.visibility = View.VISIBLE
-                btnTabScreenlight.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
-                ImageViewCompat.setImageTintList(imgTabScreenlight, ColorStateList.valueOf(colorMain))
-                tvTabScreenlight.setTextColor(colorMain)
-                displayTabFragment(ScreenLightFragment.newInstance())
-            }
-            BottomTab.LED -> {
-                vGlowLed.visibility = View.VISIBLE
-                btnTabLed.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
-                ImageViewCompat.setImageTintList(imgTabLed, ColorStateList.valueOf(colorMain))
-                tvTabLed.setTextColor(colorMain)
-                displayTabFragment(LedFragment.newInstance())
-            }
-            BottomTab.FLASH_ALERT -> {
-                vGlowFlashAlert.visibility = View.VISIBLE
-                btnTabFlashAlert.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
-                ImageViewCompat.setImageTintList(imgTabFlashAlert, ColorStateList.valueOf(colorMain))
-                tvTabFlashAlert.setTextColor(colorMain)
-                displayTabFragment(FlashAlertFragment.newInstance())
+            when (selectedTab) {
+                BottomTab.FLASHLIGHT -> {
+                    vGlowFlashlight.visibility = View.VISIBLE
+                    btnTabFlashlight.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
+                    ImageViewCompat.setImageTintList(imgTabFlashlight, ColorStateList.valueOf(colorMain))
+                    tvTabFlashlight.setTextColor(colorMain)
+                    displayTabFragment(FlashlightFragment.newInstance())
+                }
+                BottomTab.SCREENLIGHT -> {
+                    vGlowScreenlight.visibility = View.VISIBLE
+                    btnTabScreenlight.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
+                    ImageViewCompat.setImageTintList(imgTabScreenlight, ColorStateList.valueOf(colorMain))
+                    tvTabScreenlight.setTextColor(colorMain)
+                    displayTabFragment(ScreenLightFragment.newInstance())
+                }
+                BottomTab.LED -> {
+                    vGlowLed.visibility = View.VISIBLE
+                    btnTabLed.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
+                    ImageViewCompat.setImageTintList(imgTabLed, ColorStateList.valueOf(colorMain))
+                    tvTabLed.setTextColor(colorMain)
+                    displayTabFragment(LedFragment.newInstance())
+                }
+                BottomTab.FLASH_ALERT -> {
+                    vGlowFlashAlert.visibility = View.VISIBLE
+                    btnTabFlashAlert.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
+                    ImageViewCompat.setImageTintList(imgTabFlashAlert, ColorStateList.valueOf(colorMain))
+                    tvTabFlashAlert.setTextColor(colorMain)
+                    displayTabFragment(FlashAlertFragment.newInstance())
+                }
             }
         }
     }

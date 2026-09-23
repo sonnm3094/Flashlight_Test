@@ -7,7 +7,7 @@
 
     <TextView
         style="@style/Widget.App.CardTitle"
-        android:text="Flashing Speed" />
+        android:text="@string/flashing_speed" />
 
     <com.af.pb.component.common.view.SliderCardView
         android:id="@+id/cardFlashingOn"
@@ -16,7 +16,7 @@
         android:layout_marginTop="16dp"
         app:sliderMax="50"
         app:sliderMin="1"
-        app:sliderTitle="Flashing ON"
+        app:sliderTitle="@string/flashing_on"
         app:sliderUnit="s"
         app:sliderValue="5" />
 
@@ -27,7 +27,7 @@
         android:layout_marginTop="20dp"
         app:sliderMax="50"
         app:sliderMin="1"
-        app:sliderTitle="Flashing OFF"
+        app:sliderTitle="@string/flashing_off"
         app:sliderUnit="s"
         app:sliderValue="5" />
 

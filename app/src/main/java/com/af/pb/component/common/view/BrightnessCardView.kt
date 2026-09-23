@@ -2,6 +2,7 @@ package com.af.pb.component.common.view
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.core.content.ContextCompat
 import com.af.pb.R
 
 class BrightnessCardView @JvmOverloads constructor(
@@ -15,6 +16,7 @@ class BrightnessCardView @JvmOverloads constructor(
         val p = (16 * resources.displayMetrics.density).toInt()
         setPadding(p, p, p, p)
         setTitleRes(R.string.brightness)
+        binding.tvTitle.setTextColor(ContextCompat.getColor(context, R.color.white))
         setUnit("%")
         setRange(0, 100)
     }

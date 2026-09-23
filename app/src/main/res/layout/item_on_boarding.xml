@@ -37,7 +37,7 @@
         android:textColor="@color/white"
         android:textSize="@dimen/size20"
         android:textStyle="bold"
-        app:fontFamily="@font/google_sans_bold"
+        app:fontFamily="@font/plus_jakarta_sans_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBoarding" />
@@ -53,7 +53,7 @@
         android:textAlignment="center"
         android:textColor="@color/gray4"
         android:textSize="@dimen/size14"
-        app:fontFamily="@font/google_sans_regular"
+        app:fontFamily="@font/plus_jakarta_sans_regular"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
@@ -63,7 +63,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/size20"
-        app:dotsColor="#80FFFFFF"
+        app:dotsColor="@color/white_50_percent"
         app:dotsCornerRadius="6dp"
         app:dotsSize="10dp"
         app:dotsSpacing="6dp"
@@ -88,7 +88,7 @@
         android:textColor="@color/color_main"
         android:textSize="@dimen/size16"
         android:textStyle="bold"
-        app:fontFamily="@font/google_sans_medium"
+        app:fontFamily="@font/plus_jakarta_sans_medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvDescription" />
 

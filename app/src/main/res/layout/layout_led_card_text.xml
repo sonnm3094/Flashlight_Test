@@ -13,14 +13,14 @@
         android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/bg_mode_card_unselected"
+        android:background="@drawable/bg_seekbar_progress"
         android:hint="HELLO WORLD"
         android:inputType="textCapCharacters"
         android:paddingHorizontal="16dp"
         android:singleLine="true"
         android:textColor="@color/white"
-        android:textColorHint="#60FFFFFF"
+        android:textColorHint="@color/white_38_percent"
         android:textSize="15sp"
-        app:fontFamily="@font/google_sans_medium" />
+        app:fontFamily="@font/plus_jakarta_sans_medium" />
 
 </LinearLayout>

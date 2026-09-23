@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_main"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:paddingHorizontal="16dp">
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="8dp"
+            android:src="@drawable/ic_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/white" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cardNotification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/bg_rectangle_box"
+        android:padding="14dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgSmsIcon"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:src="@drawable/ic_header_sms"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvMessageTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/message_title"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:fontFamily="@font/plus_jakarta_sans_bold"
+            app:layout_constraintStart_toEndOf="@+id/imgSmsIcon"
+            app:layout_constraintTop_toTopOf="@+id/imgSmsIcon" />
+
+        <TextView
+            android:id="@+id/tvMessageTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/time_now"
+            android:textColor="@color/color_text_subtitle"
+            android:textSize="13sp"
+            app:fontFamily="@font/plus_jakarta_sans_regular"
+            app:layout_constraintBottom_toBottomOf="@+id/tvMessageTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvMessageTitle" />
+
+        <TextView
+            android:id="@+id/tvMessageBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="2dp"
+            android:text="I’m OK"
+            android:textColor="#D0D4E0"
+            android:textSize="14sp"
+            app:fontFamily="@font/plus_jakarta_sans_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imgSmsIcon"
+            app:layout_constraintTop_toBottomOf="@+id/tvMessageTitle" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:overScrollMode="never"
+        android:paddingHorizontal="16dp"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="64dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_chat_bubble_sent"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:text="Hey there! Hello from the other side of the city. ☕"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:fontFamily="@font/plus_jakarta_sans_regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_chat_bubble_received"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:text="Good morning! Hope you're having a great start to your day."
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:fontFamily="@font/plus_jakarta_sans_regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginStart="64dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_chat_bubble_sent"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:text="Thanks! Just grabbing some coffee. How’s your Friday looking?"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:fontFamily="@font/plus_jakarta_sans_regular" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="64dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_chat_bubble_received"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="12dp"
+                android:text="Pretty good so far, just catching up on some reading. Have a wonderful weekend ahead!"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                app:fontFamily="@font/plus_jakarta_sans_regular" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -2,6 +2,7 @@ package com.af.pb.component.flashalert.fragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.af.pb.R
 import com.af.pb.base.fragment.BaseFragment
 import com.af.pb.component.flashalert.activity.FlashAlertDetailActivity
 import com.af.pb.databinding.FragmentFlashAlertBinding
@@ -16,16 +17,29 @@ class FlashAlertFragment : BaseFragment<FragmentFlashAlertBinding>() {
 
     override fun initViews() {
         super.initViews()
-        viewBinding.btnIncomingCalls.setOnClickListener {
-            FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_CALL)
+
+        viewBinding.btnIncomingCalls.apply {
+            imgIcon.setImageResource(R.drawable.ic_phone)
+            tvTitle.setText(R.string.incoming_calls)
+            root.setOnClickListener {
+                FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_CALL)
+            }
         }
 
-        viewBinding.btnSms.setOnClickListener {
-            FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_SMS)
+        viewBinding.btnSms.apply {
+            imgIcon.setImageResource(R.drawable.ic_mail)
+            tvTitle.setText(R.string.sms_text)
+            root.setOnClickListener {
+                FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_SMS)
+            }
         }
 
-        viewBinding.btnNotification.setOnClickListener {
-            FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_NOTIFICATION)
+        viewBinding.btnNotification.apply {
+            imgIcon.setImageResource(R.drawable.ic_notify)
+            tvTitle.setText(R.string.notification_text)
+            root.setOnClickListener {
+                FlashAlertDetailActivity.start(requireContext(), FlashAlertDetailActivity.TYPE_NOTIFICATION)
+            }
         }
     }
 

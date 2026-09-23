@@ -35,7 +35,6 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
     override fun initViews() = with(viewBinding) {
         super.initViews()
         vColorView.setBackgroundColor(color)
-        vColorView.alpha = (brightness / 100f).coerceIn(0.15f, 1.0f)
 
         ViewCompat.setOnApplyWindowInsetsListener(btnClose) { v, insets ->
             val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.systemBars())
@@ -55,12 +54,25 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
         }
     }
 
-    override fun onStart() {
-        super.onStart()
+    override fun onResume() {
+        super.onResume()
+        applyBrightness()
+    }
+
+    private fun applyBrightness() {
+        val targetBrightness = (brightness / 100f).coerceIn(0.01f, 1.0f)
+
         dialog?.window?.let { window ->
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             val lp = window.attributes
-            lp.screenBrightness = (brightness / 100f).coerceIn(0.01f, 1.0f)
+            lp.screenBrightness = targetBrightness
+            window.attributes = lp
+        }
+
+        activity?.window?.let { window ->
+            window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+            val lp = window.attributes
+            lp.screenBrightness = targetBrightness
             window.attributes = lp
         }
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="#33FACE15">
+    android:color="@color/color_yellow_mode_border">
     <item>
         <selector>
             <item android:state_pressed="true">
                 <shape>
-                    <solid android:color="#262A35" />
+                    <solid android:color="@color/color_mode_card_selected" />
                     <corners android:radius="12dp" />
                     <stroke
                         android:width="1.5dp"
@@ -14,7 +14,7 @@
             </item>
             <item>
                 <shape>
-                    <solid android:color="#1A1D24" />
+                    <solid android:color="@color/color_mode_card_selected_pressed" />
                     <corners android:radius="12dp" />
                     <stroke
                         android:width="1.5dp"
