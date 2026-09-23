@@ -24,54 +24,55 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
         super.onCreate(savedInstanceState)
     }
 
-    override fun initViews() = with(viewBinding) {
+    override fun initViews() {
         super.initViews()
+        val binding = viewBinding
 
-        btnBack.setOnClickListener { finish() }
+        binding.btnBack.setOnClickListener { finish() }
 
         when (alertType) {
             TYPE_CALL -> {
-                tvTitle.text = getString(R.string.incoming_calls)
-                imgHeaderIcon.setImageResource(R.drawable.ic_header_incoming_calls)
-                btnSelectApp.visibility = View.GONE
+                binding.tvTitle.text = getString(R.string.incoming_calls)
+                binding.imgHeaderIcon.setImageResource(R.drawable.ic_header_incoming_calls)
+                binding.btnSelectApp.visibility = View.GONE
             }
             TYPE_SMS -> {
-                tvTitle.text = getString(R.string.sms_text)
-                imgHeaderIcon.setImageResource(R.drawable.ic_header_sms)
-                btnSelectApp.visibility = View.GONE
+                binding.tvTitle.text = getString(R.string.sms_text)
+                binding.imgHeaderIcon.setImageResource(R.drawable.ic_header_sms)
+                binding.btnSelectApp.visibility = View.GONE
             }
             TYPE_NOTIFICATION -> {
-                tvTitle.text = getString(R.string.notification_text)
-                imgHeaderIcon.setImageResource(R.drawable.ic_header_notification)
-                btnSelectApp.visibility = View.VISIBLE
+                binding.tvTitle.text = getString(R.string.notification_text)
+                binding.imgHeaderIcon.setImageResource(R.drawable.ic_header_notification)
+                binding.btnSelectApp.visibility = View.VISIBLE
             }
         }
 
-        layoutSwitchCard.tvStatus.text = "Status: Off"
-        layoutSwitchCard.swStatus.setOnCheckedChangeListener { _, isChecked ->
-            layoutSwitchCard.tvStatus.text = if (isChecked) "Status: On" else "Status: Off"
+        // Separate Switch Card
+        val switchCardBinding = binding.layoutSwitchCard
+        switchCardBinding.tvStatus.text = "Status: Off"
+        switchCardBinding.swStatus.setOnCheckedChangeListener { _, isChecked ->
+            switchCardBinding.tvStatus.text = if (isChecked) "Status: On" else "Status: Off"
         }
 
+        // Flashing speed sliders
         val speedFormatter = { value: Int -> String.format(Locale.US, "%.1fs", value / 10f) }
 
-        layoutFlashingSpeedCard.cardFlashingOn.apply {
-            setRange(1, 50)
-            setValueFormatter(speedFormatter)
-            setValue(5) // 0.5s
+        val speedCardBinding = binding.layoutFlashingSpeedCard
+        speedCardBinding.cardFlashingOn.setRange(1, 50)
+        speedCardBinding.cardFlashingOn.setValueFormatter(speedFormatter)
+        speedCardBinding.cardFlashingOn.setValue(5) // 0.5s
+
+        speedCardBinding.cardFlashingOff.setRange(1, 50)
+        speedCardBinding.cardFlashingOff.setValueFormatter(speedFormatter)
+        speedCardBinding.cardFlashingOff.setValue(5) // 0.5s
+
+        binding.btnSelectApp.setOnClickListener {
+            // Select App
         }
 
-        layoutFlashingSpeedCard.cardFlashingOff.apply {
-            setRange(1, 50)
-            setValueFormatter(speedFormatter)
-            setValue(5) // 0.5s
-        }
-
-        btnSelectApp.setOnClickListener {
-
-        }
-
-        btnTest.setOnClickListener {
-
+        binding.btnTest.setOnClickListener {
+            // Test Flash Alert
         }
     }
 
