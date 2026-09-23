@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardFlashingSpeed"
+    style="@style/Widget.App.CardContainer">
+
+    <TextView
+        style="@style/Widget.App.CardTitle"
+        android:text="Flashing Speed" />
+
+    <com.af.pb.component.common.view.SliderCardView
+        android:id="@+id/cardFlashingOn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:sliderMax="50"
+        app:sliderMin="1"
+        app:sliderTitle="Flashing ON"
+        app:sliderUnit="s"
+        app:sliderValue="5" />
+
+    <com.af.pb.component.common.view.SliderCardView
+        android:id="@+id/cardFlashingOff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:sliderMax="50"
+        app:sliderMin="1"
+        app:sliderTitle="Flashing OFF"
+        app:sliderUnit="s"
+        app:sliderValue="5" />
+
+</LinearLayout>

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.af.pb.base.dialog.BaseFullScreenDialogFragment
 import com.af.pb.databinding.DialogFullscreenLightBinding
 
@@ -13,6 +15,7 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
     private var brightness: Int = 100
 
     override var allowBackToCancel: Boolean = true
+    override val forceLandscape: Boolean = true
 
     override fun inflateDialogBinding(
         inflater: LayoutInflater,
@@ -33,6 +36,15 @@ class ScreenLightFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscree
         super.initViews()
         vColorView.setBackgroundColor(color)
         vColorView.alpha = (brightness / 100f).coerceIn(0.15f, 1.0f)
+
+        ViewCompat.setOnApplyWindowInsetsListener(btnClose) { v, insets ->
+            val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.systemBars())
+            val params = v.layoutParams as? ViewGroup.MarginLayoutParams
+            params?.topMargin = (28 * v.resources.displayMetrics.density).toInt() + cutout.top
+            params?.rightMargin = (40 * v.resources.displayMetrics.density).toInt() + cutout.right
+            v.layoutParams = params
+            insets
+        }
 
         flFullScreenContainer.setOnClickListener {
             dismiss()

@@ -9,6 +9,10 @@
     <string name="for_you" translatable="false">For You</string>
     <string name="led" translatable="false">LED</string>
     <string name="flash_alert" translatable="false">Flash Alert</string>
+    <string name="incoming_calls" translatable="false">Incoming Calls</string>
+    <string name="sms_text" translatable="false">SMS</string>
+    <string name="notification_text" translatable="false">Notification</string>
+    <string name="tap_for_more_settings" translatable="false">Tap for more settings</string>
     <string name="flash_light_mode" translatable="false">Flash Light</string>
     <string name="sos_light" translatable="false">SOS Light</string>
     <string name="dj_mode" translatable="false">DJ Mode</string>
@@ -67,9 +71,9 @@
     <string name="done">Save</string>
     <string name="save" translatable="false">Save</string>
 
-    <string name="connection_lost">Oops! No Internet Connection</string>
+    <string name="connection_lost">Oops, No Internet Connection</string>
     <string name="connection_lost_message">Make sure wifi or cellular data is turned on and then try again.</string>
-    <string name="go_to_setting">Go To Setting</string>
+    <string name="go_to_setting">Go to Settings</string>
     <string name="cancel">Cancel</string>
     <string name="retry">Retry</string>
 

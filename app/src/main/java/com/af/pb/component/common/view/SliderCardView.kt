@@ -21,6 +21,7 @@ open class SliderCardView @JvmOverloads constructor(
     private var maxValue: Int = 100
     private var unit: String = "%"
     private var onValueChangeListener: ((value: Int, fromUser: Boolean) -> Unit)? = null
+    private var valueFormatter: ((value: Int) -> String)? = null
 
     init {
         attrs?.let {
@@ -74,6 +75,11 @@ open class SliderCardView @JvmOverloads constructor(
         this.onValueChangeListener = listener
     }
 
+    fun setValueFormatter(formatter: (value: Int) -> String) {
+        this.valueFormatter = formatter
+        updateValueText(getValue())
+    }
+
     fun setValue(value: Int) {
         val clamped = value.coerceIn(minValue, maxValue)
         updateValueText(clamped)
@@ -96,6 +102,11 @@ open class SliderCardView @JvmOverloads constructor(
     }
 
     private fun updateValueText(value: Int) {
-        binding.tvValue.text = "$value$unit"
+        val customText = valueFormatter?.invoke(value)
+        if (customText != null) {
+            binding.tvValue.text = customText
+        } else {
+            binding.tvValue.text = "$value$unit"
+        }
     }
 }

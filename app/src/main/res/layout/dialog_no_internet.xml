@@ -1,48 +1,87 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_black_radius"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/size20">
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/bg_item_language"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="28dp"
+    android:paddingBottom="20dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size25"
+        android:id="@+id/imgNoWifi"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@mipmap/bg_no_wifi" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/appCompatTextView5"
-        android:layout_width="wrap_content"
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size20"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:text="@string/connection_lost"
-        android:textColor="@color/purple"
-        android:textSize="@dimen/size18"
-        app:fontFamily="@font/google_sans_medium" />
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/google_sans_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgNoWifi" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:layout_width="wrap_content"
+        android:id="@+id/tvMessage"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size20"
-        android:layout_marginTop="@dimen/size6"
+        android:layout_marginTop="8dp"
         android:gravity="center"
+        android:lineSpacingExtra="3dp"
         android:text="@string/connection_lost_message"
-        android:textColor="@color/text_main"
-        android:textSize="@dimen/size14" />
+        android:textColor="#A0A5B5"
+        android:textSize="14sp"
+        app:fontFamily="@font/google_sans_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRetry"
-        style="@style/StylePurpleButton"
-        android:layout_marginTop="@dimen/size30"
-        android:text="@string/retry" />
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background_yellow_button_selector"
+        android:includeFontPadding="false"
+        android:text="@string/go_to_setting"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/google_sans_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessage" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnCancel"
-        style="@style/StyleTransparentButton"
-        android:layout_marginTop="@dimen/size15"
-        android:text="@string/cancel" />
-</LinearLayout>
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:includeFontPadding="false"
+        android:text="@string/cancel"
+        android:textAllCaps="false"
+        android:textColor="#A0A5B5"
+        android:textSize="16sp"
+        app:fontFamily="@font/google_sans_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnRetry" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.WindowManager
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.af.pb.base.dialog.BaseFullScreenDialogFragment
 import com.af.pb.databinding.DialogFullscreenLedBinding
 import com.af.pb.domain.model.LedDirection
@@ -20,8 +22,10 @@ class LedFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLedBind
     private var visualEffect: LedVisualEffect = LedVisualEffect.GLOW
     private var bgResId: Int? = null
     private var bgUriString: String? = null
+    private var bgAssetPath: String? = null
 
     override var allowBackToCancel: Boolean = true
+    override val forceLandscape: Boolean = true
 
     override fun inflateDialogBinding(
         inflater: LayoutInflater,
@@ -42,6 +46,7 @@ class LedFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLedBind
             val res = it.getInt(ARG_BG_RES, 0)
             if (res != 0) bgResId = res
             bgUriString = it.getString(ARG_BG_URI)
+            bgAssetPath = it.getString(ARG_BG_ASSET)
         }
     }
 
@@ -57,8 +62,19 @@ class LedFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLedBind
 
         if (!bgUriString.isNullOrEmpty()) {
             vFullScreenLed.setLedBackgroundUri(bgUriString)
+        } else if (!bgAssetPath.isNullOrEmpty()) {
+            vFullScreenLed.setLedBackgroundAsset(bgAssetPath)
         } else {
             vFullScreenLed.setLedBackgroundRes(bgResId)
+        }
+
+        ViewCompat.setOnApplyWindowInsetsListener(btnClose) { v, insets ->
+            val cutout = insets.getInsets(WindowInsetsCompat.Type.displayCutout() or WindowInsetsCompat.Type.systemBars())
+            val params = v.layoutParams as? ViewGroup.MarginLayoutParams
+            params?.topMargin = (28 * v.resources.displayMetrics.density).toInt() + cutout.top
+            params?.rightMargin = (40 * v.resources.displayMetrics.density).toInt() + cutout.right
+            v.layoutParams = params
+            insets
         }
 
         flFullScreenContainer.setOnClickListener {
@@ -84,6 +100,7 @@ class LedFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLedBind
         private const val ARG_EFFECT = "arg_effect"
         private const val ARG_BG_RES = "arg_bg_res"
         private const val ARG_BG_URI = "arg_bg_uri"
+        private const val ARG_BG_ASSET = "arg_bg_asset"
 
         fun newInstance(state: LedState, bgResId: Int?): LedFullScreenDialog {
             return LedFullScreenDialog().apply {
@@ -96,6 +113,9 @@ class LedFullScreenDialog : BaseFullScreenDialogFragment<DialogFullscreenLedBind
                     putInt(ARG_EFFECT, state.visualEffect.ordinal)
                     putInt(ARG_BG_RES, bgResId ?: 0)
                     putString(ARG_BG_URI, state.customBackgroundUri)
+                    if (state.selectedBackgroundId.startsWith("background/")) {
+                        putString(ARG_BG_ASSET, state.selectedBackgroundId)
+                    }
                 }
             }
         }

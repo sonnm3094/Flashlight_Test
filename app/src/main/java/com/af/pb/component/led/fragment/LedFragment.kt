@@ -143,10 +143,12 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
         layoutLedPreview.vLedPreview.setLedDirection(state.direction)
         layoutLedPreview.vLedPreview.setLedVisualEffect(state.visualEffect)
 
-        val resId = getPresetResId(state.selectedBackgroundId)
         if (!state.customBackgroundUri.isNullOrEmpty() && state.selectedBackgroundId == "custom") {
             layoutLedPreview.vLedPreview.setLedBackgroundUri(state.customBackgroundUri)
+        } else if (state.selectedBackgroundId.startsWith("background/")) {
+            layoutLedPreview.vLedPreview.setLedBackgroundAsset(state.selectedBackgroundId)
         } else {
+            val resId = getPresetResId(state.selectedBackgroundId)
             layoutLedPreview.vLedPreview.setLedBackgroundRes(resId)
         }
 
@@ -219,9 +221,22 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
     private fun updateBackgroundList(state: LedState) {
         val items = mutableListOf<LedBackgroundItem>()
         items.add(LedBackgroundItem("add", isAddButton = true))
-        items.add(LedBackgroundItem("preset_1", resId = R.drawable.bg_led_preset_1))
-        items.add(LedBackgroundItem("preset_2", resId = R.drawable.bg_led_preset_2))
-        items.add(LedBackgroundItem("preset_3", resId = R.drawable.bg_led_preset_3))
+
+        // Scan all image files in assets/background/
+        try {
+            val assetFiles = requireContext().assets.list("background")?.sortedWith { a, b ->
+                val numA = a.substringAfter("_").substringBefore(".").toIntOrNull() ?: Int.MAX_VALUE
+                val numB = b.substringAfter("_").substringBefore(".").toIntOrNull() ?: Int.MAX_VALUE
+                numA.compareTo(numB)
+            } ?: emptyList()
+
+            assetFiles.forEach { fileName ->
+                val assetPath = "background/$fileName"
+                items.add(LedBackgroundItem(id = assetPath, assetPath = assetPath))
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         if (!state.customBackgroundUri.isNullOrEmpty()) {
             items.add(LedBackgroundItem("custom", uriString = state.customBackgroundUri))
@@ -230,7 +245,6 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
         backgroundAdapter.submitList(items, state.selectedBackgroundId)
 
         val previewView = viewBinding.layoutLedBackground.imgSelectedBgPreview
-        val resId = getPresetResId(state.selectedBackgroundId)
         if (!state.customBackgroundUri.isNullOrEmpty() && state.selectedBackgroundId == "custom") {
             try {
                 val uri = Uri.parse(state.customBackgroundUri)
@@ -242,11 +256,24 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
             } catch (_: Exception) {
                 previewView.visibility = View.GONE
             }
-        } else if (resId != null) {
-            previewView.setImageResource(resId)
-            previewView.visibility = View.VISIBLE
+        } else if (state.selectedBackgroundId.startsWith("background/")) {
+            try {
+                val input = requireContext().assets.open(state.selectedBackgroundId)
+                val bitmap = BitmapFactory.decodeStream(input)
+                input.close()
+                previewView.setImageBitmap(bitmap)
+                previewView.visibility = View.VISIBLE
+            } catch (_: Exception) {
+                previewView.visibility = View.GONE
+            }
         } else {
-            previewView.visibility = View.GONE
+            val resId = getPresetResId(state.selectedBackgroundId)
+            if (resId != null) {
+                previewView.setImageResource(resId)
+                previewView.visibility = View.VISIBLE
+            } else {
+                previewView.visibility = View.GONE
+            }
         }
     }
 
@@ -263,7 +290,7 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
         RecyclerView.Adapter<BackgroundAdapter.BackgroundViewHolder>() {
 
         private var items = listOf<LedBackgroundItem>()
-        private var selectedId: String = "preset_1"
+        private var selectedId: String = "background/bg_1.jpg"
 
         fun submitList(newItems: List<LedBackgroundItem>, selectedId: String) {
             this.items = newItems
@@ -291,7 +318,7 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
                 val isSelected = item.id == selectedId
 
                 if (item.isAddButton) {
-                    itemBinding.root.setBackgroundResource(R.drawable.bg_mode_card_unselected)
+                    itemBinding.root.setBackgroundResource(R.drawable.bg_rectangle_box)
                     itemBinding.imgBackground.setImageDrawable(null)
                     itemBinding.imgBackground.background = null
                     itemBinding.imgAddIcon.visibility = View.VISIBLE
@@ -306,12 +333,21 @@ class LedFragment : BaseFragment<FragmentLedBinding>() {
                     itemBinding.vSelectionBorder.visibility =
                         if (isSelected) View.VISIBLE else View.GONE
 
-                    if (item.resId != null) {
+                    if (item.assetPath != null) {
+                        try {
+                            val input = itemBinding.root.context.assets.open(item.assetPath)
+                            val bitmap = BitmapFactory.decodeStream(input)
+                            input.close()
+                            itemBinding.imgBackground.setImageBitmap(bitmap)
+                        } catch (_: Exception) {
+                            itemBinding.imgBackground.setImageDrawable(null)
+                        }
+                    } else if (item.resId != null) {
                         itemBinding.imgBackground.setImageResource(item.resId)
                     } else if (!item.uriString.isNullOrEmpty()) {
                         try {
                             val uri = Uri.parse(item.uriString)
-                            val input = requireContext().contentResolver.openInputStream(uri)
+                            val input = itemBinding.root.context.contentResolver.openInputStream(uri)
                             val bitmap = BitmapFactory.decodeStream(input)
                             input?.close()
                             itemBinding.imgBackground.setImageBitmap(bitmap)

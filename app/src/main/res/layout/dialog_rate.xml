@@ -1,72 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_black_radius"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/size15"
-    android:paddingBottom="@dimen/size25">
+    android:layout_gravity="center"
+    android:layout_marginHorizontal="20dp"
+    android:background="@drawable/bg_item_language"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="20dp"
+    android:paddingBottom="24dp">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        app:srcCompat="@mipmap/ic_header_rate"
-        android:layout_height="wrap_content"/>
+        android:id="@+id/btnClose"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="4dp"
+        android:src="@drawable/ic_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgHeaderRate"
+        android:layout_width="88dp"
+        android:layout_height="88dp"
+        android:layout_marginTop="12dp"
+        android:scaleType="fitCenter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_rate_0" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size10"
-        android:layout_marginTop="@dimen/size10"
+        android:layout_marginTop="16dp"
         android:gravity="center"
-        android:text="@string/rate_title"
-        android:textColor="@color/color_main"
-        android:textSize="@dimen/size16"
-        app:fontFamily="@font/google_sans_medium" />
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/google_sans_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgHeaderRate"
+        tools:text="Do you like &quot;FlashLight&quot;?" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvMessage"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/size10"
-        android:layout_marginTop="@dimen/size10"
+        android:layout_marginTop="8dp"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:text="@string/rate_message"
-        android:textColor="@color/text_main"
-        android:textSize="@dimen/size14" />
+        android:lineSpacingExtra="3dp"
+        android:textColor="#A0A5B5"
+        android:textSize="14sp"
+        app:fontFamily="@font/google_sans_regular"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+        tools:text="Your feedback helps us improve. Please take a moment to rate your experience." />
 
     <per.wsj.library.AndRatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="@dimen/size20"
+        android:layout_height="44dp"
+        android:layout_marginTop="20dp"
         app:bgDrawable="@drawable/ic_star_normal"
         app:keepOriginColor="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMessage"
         app:starDrawable="@drawable/ic_star_selected"
-        app:starSpacing="@dimen/size10" />
+        app:starSpacing="10dp" />
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnRate"
-        style="@style/StylePurpleButton"
-        android:layout_marginTop="@dimen/size20"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/background_yellow_button_selector"
         android:includeFontPadding="false"
-        android:text="@string/rate_us_now"
+        android:text="Submit"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="@dimen/size14"
-        app:fontFamily="@font/google_sans_medium" />
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:fontFamily="@font/google_sans_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnCancel"
-        style="@style/StyleTransparentButton"
-        android:layout_marginTop="@dimen/size5"
-        android:includeFontPadding="false"
-        android:text="@string/cancel"
-        android:textAllCaps="false"
-        android:textColor="@color/white"
-        android:textSize="@dimen/size14"
-        app:fontFamily="@font/google_sans_medium" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

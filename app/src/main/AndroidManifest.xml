@@ -58,6 +58,10 @@
             android:name=".component.main.setting.SettingActivity"
             android:screenOrientation="portrait" />
 
+        <activity
+            android:name=".component.flashalert.activity.FlashAlertDetailActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

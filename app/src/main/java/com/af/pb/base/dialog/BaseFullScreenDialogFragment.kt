@@ -37,7 +37,7 @@ abstract class BaseFullScreenDialogFragment<V : ViewBinding>(
 
     open var allowBackToCancel: Boolean = false
     open val useBottomSheetAnimation: Boolean = false
-    open val forceLandscape: Boolean = true
+    open val forceLandscape: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,

@@ -18,6 +18,7 @@ data class LedBackgroundItem(
     val id: String,
     val resId: Int? = null,
     val uriString: String? = null,
+    val assetPath: String? = null,
     val isAddButton: Boolean = false
 )
 
@@ -28,6 +29,6 @@ data class LedState(
     val textColor: Int = 0xFFFFD54F.toInt(),
     val direction: LedDirection = LedDirection.LEFT,
     val visualEffect: LedVisualEffect = LedVisualEffect.GLOW,
-    val selectedBackgroundId: String = "preset_1",
+    val selectedBackgroundId: String = "background/bg_1.jpg",
     val customBackgroundUri: String? = null
 )

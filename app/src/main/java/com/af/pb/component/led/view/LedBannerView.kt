@@ -125,6 +125,19 @@ class LedBannerView @JvmOverloads constructor(
         invalidate()
     }
 
+    fun setLedBackgroundAsset(assetPath: String?) {
+        this.backgroundResId = null
+        this.backgroundBitmap = null
+        if (!assetPath.isNullOrEmpty()) {
+            try {
+                val inputStream = context.assets.open(assetPath)
+                this.backgroundBitmap = BitmapFactory.decodeStream(inputStream)
+                inputStream.close()
+            } catch (_: Exception) {}
+        }
+        invalidate()
+    }
+
     private fun resetPosition() {
         when (direction) {
             LedDirection.LEFT -> offsetX = width.toFloat()

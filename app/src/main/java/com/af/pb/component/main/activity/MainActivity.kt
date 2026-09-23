@@ -15,6 +15,7 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import com.af.pb.R
 import com.af.pb.base.activity.BaseActivity
+import com.af.pb.component.flashalert.fragment.FlashAlertFragment
 import com.af.pb.component.flashlight.fragment.FlashlightFragment
 import com.af.pb.component.flashlight.viewmodel.FlashlightViewModel
 import com.af.pb.component.led.fragment.LedFragment
@@ -125,6 +126,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>() {
                 btnTabFlashAlert.setBackgroundResource(R.drawable.bg_bottom_nav_selected)
                 ImageViewCompat.setImageTintList(imgTabFlashAlert, ColorStateList.valueOf(colorMain))
                 tvTabFlashAlert.setTextColor(colorMain)
+                displayTabFragment(FlashAlertFragment.newInstance())
             }
         }
     }
