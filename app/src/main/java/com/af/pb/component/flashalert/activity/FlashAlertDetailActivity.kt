@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -12,13 +13,16 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.af.pb.R
 import com.af.pb.base.activity.BaseActivity
 import com.af.pb.databinding.ActivityFlashAlertDetailBinding
 import com.af.pb.domain.usecase.GetSelectedAppPackagesUseCase
+import com.af.pb.utils.Permission
 import com.af.pb.utils.SpManager
+import com.af.pb.utils.isPermissionGranted
 import com.makeramen.roundedimageview.RoundedImageView
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -35,7 +39,7 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
 
     private val permissionLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            val isGranted = result.resultCode == RESULT_OK || isCameraPermissionGranted()
+            val isGranted = result.resultCode == RESULT_OK || areAllPermissionsGranted()
             if (isGranted) {
                 SpManager.getInstance(this).setFlashAlertEnabled(alertType, true)
                 updateStatusUi(true)
@@ -114,7 +118,7 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
         switchCardBinding.swStatus.setOnCheckedChangeListener { _, isChecked ->
             if (isProgrammaticChange) return@setOnCheckedChangeListener
             if (isChecked) {
-                if (!isCameraPermissionGranted()) {
+                if (!areAllPermissionsGranted()) {
                     permissionLauncher.launch(Intent(this, PermissionActivity::class.java))
                 } else {
                     SpManager.getInstance(this).setFlashAlertEnabled(alertType, true)
@@ -155,10 +159,19 @@ class FlashAlertDetailActivity : BaseActivity<ActivityFlashAlertDetailBinding>()
     }
 
     private fun isCameraPermissionGranted(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            this,
-            Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
+        return isPermissionGranted(Permission.CAMERA)
+    }
+
+    private fun isNotificationPermissionGranted(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            isPermissionGranted(Permission.POST_NOTIFICATIONS)
+        } else {
+            NotificationManagerCompat.from(this).areNotificationsEnabled()
+        }
+    }
+
+    private fun areAllPermissionsGranted(): Boolean {
+        return isCameraPermissionGranted() && isNotificationPermissionGranted()
     }
 
     private fun updateStatusUi(isEnabled: Boolean) {
